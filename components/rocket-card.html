@@ -1,0 +1,217 @@
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+
+<!-- <link rel="import" href="../bower_components/firebase-element/firebase-document.html"> -->
+
+<link rel="import" href="../components/map-button.html">
+
+<dom-module id="rocket-card">
+  <template>
+    <style>
+      :host {
+        transition: opacity 1s;
+      }
+
+      paper-card {
+        background-color: var(--rocket-card-background-color, white);
+        color: var(--primary-text-color);
+        width: 100%;
+        overflow: hidden;
+      }
+
+      paper-button {
+        color: var(--primary-color);
+      }
+      paper-button iron-icon {
+        vertical-align: -6px;
+      }
+
+      .distance {
+        color: var(--light-text-color);
+        font-size: 15px;
+      }
+
+      .header {
+        @apply(--paper-font-headline);
+        margin-bottom: 5px;
+      }
+      .header .rocketname {
+        outline-color: var(--primary-color);
+      }
+
+      .status {
+        background-color: var(--paper-green-600);
+        border-radius: 2px;
+        color: white;
+        padding: 2px 6px;
+      }
+      .status::after {
+        content: 'Active';
+      }
+      .status.inactive {
+        background-color: var(--paper-red-600);
+      }
+      .status.inactive::after {
+        content: 'Inactive';
+      }
+
+      .location {
+        @apply(--paper-font-subhead);
+        color: var(--light-text-color);
+      }
+      .location iron-icon {
+        color: var(--primary-color);
+        height: 18px;
+        width: 18px;
+        vertical-align: -3px;
+      }
+
+      .lastupdated {
+        color: var(--light-text-color);
+        font-size: 12px;
+        font-style: italic;
+      }
+
+      .right {
+        float: right;
+      }
+    </style>
+
+    <!-- <firebase-document id="firebase" data="{{otherrocket}}" log="true"></firebase-document> -->
+
+    <paper-card>
+      <div class="card-content">
+        <div class="distance right">
+          <iron-icon icon="communication:location-on"></iron-icon>
+          <span id="distance">---</span>
+        </div>
+
+        <div class="header">
+          <span id="rocketname" class="rocketname" contenteditable></span>
+        </div>
+
+        <div id="status" class="status right"></div>
+
+        <div class="location">
+          Location: <span id="latitude">---</span>, <span id="longitude">---</span>
+          <iron-icon id="fix"></iron-icon>
+        </div>
+
+        <div class="lastupdated">
+          Last Updated: <span id="prettydate"></span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <map-button rocket="[[rocket]]"></map-button>
+        <paper-button class="right" on-tap="hideCard">
+          <iron-icon icon="icons:clear"></iron-icon>
+          Hide
+        </paper-button>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'rocket-card',
+
+      properties: {
+        rocket: {
+          type: Object,
+          observer: '_rocketChanged'
+        },
+        currentLocation: {
+          type: Object,
+          observer: '_locationChanged'
+        }
+      },
+
+      ready: function () {
+        var self = this;
+        var timeout;
+
+        // this.$.firebase.location = 'https://amber-torch-2600.firebaseio.com/' + this.rocket.__firebaseKey__;
+
+        var firebase = new Firebase('https://amber-torch-2600.firebaseio.com');
+
+        this.$.rocketname.addEventListener('input', function (e) {
+          clearTimeout(timeout);
+          timeout = setTimeout(function () {
+            firebase.child(self.rocket.__firebaseKey__).update({
+              name: self.$.rocketname.textContent
+            });
+          }, 1000);
+        });
+      },
+
+      _rocketChanged: function (rocket) {
+        var self = this;
+
+        this.$.rocketname.textContent = rocket.name || rocket.__firebaseKey__;
+
+        if (rocket.location) {
+          this.$.latitude.textContent = rocket.location.latitude;
+          this.$.longitude.textContent = rocket.location.longitude;
+        }
+
+        this.$.fix.icon = (rocket.fix) ? 'device:gps-fixed' : 'device:gps-not-fixed';
+        this.$.fix.title = (rocket.fix) ? 'Has GPS Fix' : 'No fix';
+
+        var date = new Date(rocket.time);
+        this.$.prettydate.textContent = date.toLocaleString();
+
+        if (rocket.fix && this.currentLocation) {
+          var distance = this.calculateDistance(this.currentLocation, rocket.location);
+          this.$.distance.textContent = Math.round(distance).toLocaleString('en-US') + 'ft';
+        }
+
+        clearTimeout(this._timeout);
+        this.$.status.classList.remove('inactive');
+        this._timeout = setTimeout(function () {
+          self.$.status.classList.add('inactive');
+        }, 10000);
+      },
+
+      _locationChanged: function (currentLocation) {
+        if (this.rocket.fix) {
+          var distance = this.calculateDistance(currentLocation, this.rocket.location);
+          this.$.distance.textContent = Math.round(distance).toLocaleString('en-US') + 'ft';
+        }
+      },
+
+      hideCard: function () {
+        var self = this;
+
+        this.style.opacity = 0;
+        setTimeout(function () {
+         self.style.display = 'none';
+        }, 1000);
+      },
+
+      calculateDistance: function (source, dest) {
+        // haversine formula
+        var R = 20903520; // Earth radius, feet
+
+        var φ1 = source.latitude.toRadians();
+        var φ2 = dest.latitude.toRadians();
+        var Δφ = (dest.latitude - source.latitude).toRadians();
+        var Δλ = (dest.longitude - source.longitude).toRadians();
+
+        var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return R * c;
+      }
+    });
+
+    if (Number.prototype.toRadians === undefined) {
+      Number.prototype.toRadians = function() { return this * Math.PI / 180; };
+    }
+  </script>
+</dom-module>

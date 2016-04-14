@@ -1,0 +1,28 @@
+{
+  "name": "rocket-tracker",
+  "authors": [
+    "Marc Matteo <marcm@lectroid.net>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "firebase-element": "GoogleWebComponents/firebase-element#^1.0.12",
+    "paper-header-panel": "PolymerElements/paper-header-panel#^1.1.5",
+    "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.4",
+    "paper-card": "PolymerElements/paper-card#^1.1.1",
+    "paper-button": "PolymerElements/paper-button#^1.0.11",
+    "iron-icons": "PolymerElements/iron-icons#^1.1.3"
+  }
+}

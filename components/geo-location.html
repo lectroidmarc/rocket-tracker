@@ -1,0 +1,22 @@
+<dom-module id="geo-location">
+  <script>
+    Polymer({
+      is: 'geo-location',
+
+      properties: {
+        coords: {
+          type: Object,
+          notify: true
+        },
+      },
+
+      ready: function () {
+        var self = this;
+
+        navigator.geolocation.watchPosition(function (position) {
+          self.coords = position.coords;
+        });
+      }
+    });
+  </script>
+</dom-module>
