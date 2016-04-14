@@ -30,7 +30,7 @@ If ZigBee radios are used, optional relay nodes can be added to extend range or 
 
 ### Configuration
 
-Configuration is done via config files.  The transmitter code uses a `config.h` file and the ground station a `config.js` file.
+Configuration is done via config files.  The transmitter code uses a `config.h` file and the ground station a `config.js` file.  These are covered in more detail in each project.
 
 ##### XBee Radio Setup
 
@@ -40,7 +40,7 @@ For [ZigBee](https://en.wikipedia.org/wiki/ZigBee) radios, the proper ZigBee fir
 
 Note: Alternatively, settings (such as the PAN ID) can be pre-configured in each module.  In these cases, comment out the matching settings in the configuration file so they're not overwritten.
 
-###### Relay Nodes
+##### Relay Nodes
 
 Relay nodes however should be configured in firmware with the PAN ID (`ATID`) and with Channel Verification turned on (`ATJV1`).
 
