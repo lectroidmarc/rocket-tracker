@@ -1,0 +1,11 @@
+
+[Service]
+ExecStart=/usr/local/bin/node /home/root/ground-station/node/app.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ground-station
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

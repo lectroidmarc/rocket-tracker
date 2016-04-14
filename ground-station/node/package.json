@@ -1,0 +1,16 @@
+{
+  "name": "ground-station",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marc Matteo <marcm@lectroid.net>",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^2.4.2",
+    "serialport": "^2.0.6",
+    "xbee-api": "^0.4.2"
+  }
+}
