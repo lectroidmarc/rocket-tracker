@@ -4,15 +4,17 @@ This is a [NodeJS](https://nodejs.org/en/) app to handle incoming location data 
 
 ### Configuration
 
-Rename the `config.sample.js` file to `config.js` and edit what needs to be edited.  Basically this means set the location of your Firebase DB is and what serial port your XBee radio is attached to.
+Rename the `config.sample.js` file to `config.js` and edit what needs to be edited.  Basically this means setting the name of your Firebase DB and what setting the serial port your XBee radio is attached to.
 
-Start the listener with:
+There are different blocks for each supported XBee radio type, XBee Series 1, XBee-PRO 900 and XBee Zigbee modules.  Many options are duplicated for so only uncomment one set at a time.
+
+Then start the listener with:
 
     # node node/app
 
-### Auto Starting
+### Auto Starting (systemd)
 
-Install the `ground-station.service.txt` file into `/etc/systemd/system/ground-station.service`.  Then enable it with the following:
+If using systemd, install the `ground-station.service.txt` file into `/etc/systemd/system/ground-station.service`.  Then enable it with the following:
 
     # systemctl enable ground-station
     # systemctl start ground-station
