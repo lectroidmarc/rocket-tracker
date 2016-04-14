@@ -10,7 +10,7 @@ The system is made up of the following components:
 
 ##### The GPS Transmitter
 
-Transmission from the rocket to the ground is done via [XBee radio](http://www.digi.com/lp/xbee).  The working prototype is based on a [Sparkfun Fio v3](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide) with an [XBee-Pro 900mhz](https://www.sparkfun.com/products/9097) radio and an [Adafruit Ultimate GPS](https://learn.adafruit.com/adafruit-ultimate-gps).
+Transmission from the rocket to the ground is done via [XBee radio](http://www.digi.com/lp/xbee).  The working prototype is based on a [Sparkfun Fio v3](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide) with an XBee radio attached and connected to an [Adafruit Ultimate GPS](https://learn.adafruit.com/adafruit-ultimate-gps).
 
 Transmissions are 9 byte packets made up of a status byte then 4 bytes for latitude and 4 bytes for longitude (each are 4 byte floats).
 
