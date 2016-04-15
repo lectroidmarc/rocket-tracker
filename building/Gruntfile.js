@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         livereloadOnError: false
       },
       html: {
-        files: ['index.html', 'components/*.html']
+        files: ['../index.html', '../components/*.html']
       }
     }
   });
