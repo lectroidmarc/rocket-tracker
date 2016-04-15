@@ -35,11 +35,7 @@
       },
 
       _rocketChanged: function (rocket) {
-        if (rocket.location) {
-          this.disabled = false;
-        } else {
-          this.disabled = true;
-        }
+        this.toggleAttribute('disabled', !rocket.location);
       },
 
       openmap: function () {
