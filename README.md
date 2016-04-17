@@ -10,29 +10,27 @@ The system is made up of the following components:
 
 ##### The GPS Transmitter
 
-Transmission from the rocket to the ground is done via [XBee radio](http://www.digi.com/lp/xbee).  The working prototype is based on a [Sparkfun Fio v3](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide) with an XBee radio attached and connected to an [Adafruit Ultimate GPS](https://learn.adafruit.com/adafruit-ultimate-gps).
+The GPS transmitter is a small microcontroller that connects to a GPS and some kind of [XBee radio](http://www.digi.com/lp/xbee).  The micorcontroller parses the NMEA data from the GPS and transmits location data once per second over the radio.
 
-Transmissions are 9 byte packets made up of a status byte then 4 bytes for latitude and 4 bytes for longitude (each are 4 byte floats).
+Transmission packets are 9 byte packets made up of a status byte then 4 bytes for latitude and 4 bytes for longitude (each are 4 byte floats).
 
 ##### The Ground Station
 
-The ground station's job is to listen for location broadcasts on the XBee network and forward the location info -- as well as the transmitter's source address -- to a [Firebase](https://www.firebase.com/) based database.
+The ground station listens for location messages from the transmitters and then forwards their location to a [Firebase](https://www.firebase.com/) based database.
 
-The ground station code is a simple [NodeJS](https://nodejs.org/) app and can run on anything that can run Node and has a serial port to host an XBee radio.  Currently the prototype is an [Intel Edison](https://www-ssl.intel.com/content/www/us/en/do-it-yourself/edison.html).
+If ZigBee radios are used, the ground station is also the network coordinator.
+
+The ground station code itself is a simple [NodeJS](https://nodejs.org/) app and so can run on anything that can run NodeJS and has a serial port to talk to an XBee radio.  And has internet access.
 
 ##### The Client App
 
-The client app in this case is a web app.  Based on [Polymer](https://www.polymer-project.org/1.0/) and hosted on GitHub Pages, it connects to Firebase and displays the location data in near real time, allowing the user to open the rocket's location in a mapping app.
+The client app in this case is a web app.  Built using [Polymer](https://www.polymer-project.org/1.0/) it connects to Firebase and displays the location data in near real time and allows the user to open the rocket's location in a mapping app.
 
-##### Optional Relay Nodes
+##### Dumb Relays (optional)
 
-If ZigBee radios are used, optional relay nodes can be added to extend range or enhance coverage.  These are simple ZigBee "routers" that have no other logic to them, just powered pre-configured radios.
+If using ZigBee radios, every GPS transmitter is already a "router" but dedicated routers could also be added to extend range or enhance coverage.  These are simple ZigBee routers node that have no other logic to them, just powered pre-configured radios.
 
-### Configuration
-
-Configuration is done via config files.  The transmitter code uses a `config.h` file and the ground station a `config.js` file.  These are covered in more detail in each project.
-
-##### XBee Radio Setup
+### XBee Radio Setup
 
 Generally speaking the only thing that needs to be changed from a factory default XBee radio is that they need to be placed into [API Mode 2](http://knowledge.digi.com/articles/Knowledge_Base_Article/What-is-API-Application-Programming-Interface-Mode-and-how-does-it-work).  Everything else can be handled in software.
 
@@ -40,9 +38,9 @@ For [ZigBee](https://en.wikipedia.org/wiki/ZigBee) radios, the proper ZigBee fir
 
 Note: Alternatively, settings (such as the PAN ID) can be pre-configured in each module.  In these cases, comment out the matching settings in the configuration file so they're not overwritten.
 
-##### Relay Nodes
+##### Dumb Relay nodes
 
-Relay nodes however should be configured in firmware with the PAN ID (`ATID`) and with Channel Verification turned on (`ATJV1`).
+Dumb relay nodes however should be configured in firmware with the PAN ID (`ATID`) and with Channel Verification turned on (`ATJV1`).
 
 ### To Do
 
