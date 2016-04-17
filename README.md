@@ -24,7 +24,7 @@ The ground station code itself is a simple [NodeJS](https://nodejs.org/) app and
 
 ##### The Client App
 
-The client app in this case is a web app.  Built using [Polymer](https://www.polymer-project.org/1.0/) it connects to Firebase and displays the location data in near real time and allows the user to open the rocket's location in a mapping app.
+The client app is what the user uses to see the location of their rocket.  It connects to Firebase and displays the location data in (near) real time and allows the user to open the rocket's location in a mapping app.  Client web app code is located in the [gh-pages branch](../../tree/gh-pages) and can be seen at https://lectroidmarc.github.io/rocket-tracker/.
 
 ##### Dumb Relays (optional)
 
