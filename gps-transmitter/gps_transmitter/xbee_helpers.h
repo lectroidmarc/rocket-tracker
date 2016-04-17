@@ -15,5 +15,4 @@ uint8_t setXBeeChannelVerification (uint8_t mode);
 uint8_t setXBeeNetworkWatchdogTimeout (uint16_t timeout);
 uint8_t resetXBeeNetwork (uint8_t mode);
 
-void setPayload (float lat, float lng, uint8_t* payload);
-
+void setPayload (byte status, float lat, float lng, uint8_t* payload);
