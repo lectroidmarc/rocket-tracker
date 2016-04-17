@@ -138,13 +138,12 @@
 
         var firebase = new Firebase('https://amber-torch-2600.firebaseio.com');
 
-        this.$.rocketname.addEventListener('input', function (e) {
-          clearTimeout(timeout);
-          timeout = setTimeout(function () {
+        this.$.rocketname.addEventListener('keydown', function (e) {
+          if (e.keyCode === 13) {
             firebase.child(self.rocket.__firebaseKey__).update({
               name: self.$.rocketname.textContent
             });
-          }, 1000);
+          }
         });
       },
 
