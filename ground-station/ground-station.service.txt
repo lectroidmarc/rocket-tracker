@@ -1,6 +1,6 @@
 
 [Service]
-ExecStart=/usr/local/bin/node /home/root/ground-station/node/app.js
+ExecStart=/usr/local/bin/node /home/pi/rocket-tracker/ground-station/node/app.js
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
