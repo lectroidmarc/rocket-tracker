@@ -76,6 +76,33 @@ xbeeAPI.on('frame_object', function(frame) {
       fix: (statusByte & 0x01) ? true : false
     };
 
+    switch (statusByte >> 1 & 7) {
+      case 7:
+        data.battery = 100;
+        break;
+      case 6:
+        data.battery = 90;
+        break;
+      case 5:
+        data.battery = 80;
+        break;
+      case 4:
+        data.battery = 60;
+        break;
+      case 3:
+        data.battery = 50;
+        break;
+      case 2:
+        data.battery = 30;
+        break;
+      case 1:
+        data.battery = 20;
+        break;
+      case 0:
+        data.battery = 0;
+        break;
+    }
+
     if (data.fix) {
       data.location = {
         latitude: Number(frame.data.readFloatLE(1).toFixed(5)),
