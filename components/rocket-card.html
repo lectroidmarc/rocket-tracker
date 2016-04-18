@@ -163,12 +163,16 @@
 
         if (!rocket.battery) {
           this.$.battery.icon = 'device:battery-unknown';
+          this.$.battery.title = 'Battery: unknown';
         } else if (rocket.battery === 100) {
           this.$.battery.icon = 'device:battery-full';
+          this.$.battery.title = 'Battery: 100%';
         } else if (rocket.battery === 0) {
           this.$.battery.icon = 'device:battery-alert';
+          this.$.battery.title = 'Battery Low!';
         } else {
           this.$.battery.icon = 'device:battery-' + rocket.battery;
+          this.$.battery.title = 'Battery: ' + rocket.battery + '%';
         }
 
         var date = new Date(rocket.time);
