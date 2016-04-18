@@ -98,6 +98,7 @@
         <div class="location">
           Location: <span id="latitude">---</span>, <span id="longitude">---</span>
           <iron-icon id="fix"></iron-icon>
+          <iron-icon id="battery"></iron-icon>
         </div>
 
         <div class="lastupdated">
@@ -159,6 +160,16 @@
 
         this.$.fix.icon = (rocket.fix) ? 'device:gps-fixed' : 'device:gps-not-fixed';
         this.$.fix.title = (rocket.fix) ? 'Has GPS Fix' : 'No fix';
+
+        if (!rocket.battery) {
+          this.$.battery.icon = 'device:battery-unknown';
+        } else if (rocket.battery === 100) {
+          this.$.battery.icon = 'device:battery-full';
+        } else if (rocket.battery === 0) {
+          this.$.battery.icon = 'device:battery-alert';
+        } else {
+          this.$.battery.icon = 'device:battery-' + rocket.battery;
+        }
 
         var date = new Date(rocket.time);
         this.$.prettydate.textContent = date.toLocaleString();
