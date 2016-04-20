@@ -54,7 +54,7 @@ void setup() {
   RXLED1;
   TXLED1;
 
-  // Serial.begin(9600);
+  Serial.begin(9600);
 
   Serial1.begin(9600);
   xbee.setSerial(Serial1);

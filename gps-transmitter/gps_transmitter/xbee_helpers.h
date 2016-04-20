@@ -8,6 +8,7 @@ typedef union {
 } binaryFloat;
 
 uint8_t setXBeePanId (uint16_t addr);
+uint8_t setXBeePanId (uint64_t addr);
 uint8_t setXBeeMyAddress (uint16_t addr);
 uint8_t setXBeeChannel (uint8_t channel);
 uint8_t setXBeeHoppingChannel (uint8_t channel);

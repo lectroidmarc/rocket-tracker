@@ -14,6 +14,24 @@ uint8_t setXBeePanId (uint16_t addr) {
   return getAtResponse();
 }
 
+uint8_t setXBeePanId (uint64_t addr) {
+  uint8_t cmd[] = {  'I', 'D' };
+  uint8_t value[8];
+
+  value[0] = (addr >> 56) & 0xff;
+  value[1] = (addr >> 48) & 0xff;
+  value[2] = (addr >> 40) & 0xff;
+  value[3] = (addr >> 32) & 0xff;
+  value[4] = (addr >> 24) & 0xff;
+  value[5] = (addr >> 16) & 0xff;
+  value[6] = (addr >> 8) & 0xff;
+  value[7] = addr & 0xff;
+
+  AtCommandRequest atRequest = AtCommandRequest(cmd, value, sizeof(value));
+  xbee.send(atRequest);
+  return getAtResponse();
+}
+
 uint8_t setXBeeMyAddress (uint16_t addr) {
   uint8_t cmd[] = {  'M', 'Y' };
   uint8_t value[2];
