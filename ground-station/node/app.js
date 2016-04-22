@@ -54,6 +54,19 @@ serialport.on('open', function() {
       commandParameter: config.xbee.hopping_channel,
     }));
   }
+
+  // Check every so often to make sure the serial port hasn't gone away
+  setInterval(function () {
+    if (!serialport.isOpen()) {
+      console.error('Serial port has closed');
+      process.exit(1);
+    }
+  }, 5000);
+});
+
+serialport.on('error', function (e) {
+  console.error(e.message);
+  process.exit(1);
 });
 
 var firebase = new Firebase(config.firebase.url);
