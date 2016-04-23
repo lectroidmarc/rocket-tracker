@@ -161,10 +161,7 @@
         this.$.fix.icon = (rocket.fix) ? 'device:gps-fixed' : 'device:gps-not-fixed';
         this.$.fix.title = (rocket.fix) ? 'Has GPS Fix' : 'No fix';
 
-        if (!rocket.battery) {
-          this.$.battery.icon = 'device:battery-unknown';
-          this.$.battery.title = 'Battery: unknown';
-        } else if (rocket.battery === 100) {
+        if (rocket.battery === 100) {
           this.$.battery.icon = 'device:battery-full';
           this.$.battery.title = 'Battery: 100%';
         } else if (rocket.battery === 0) {
