@@ -69,7 +69,7 @@ serialport.on('error', function (e) {
   process.exit(1);
 });
 
-var firebase = new Firebase(config.firebase.url);
+var firebase = new Firebase(config.firebase.url + '/rockets');
 firebase.authWithCustomToken(config.firebase.secret, function(error, authData) {
   if (error) {
     console.log('Login Failed!', error);
