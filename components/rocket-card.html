@@ -4,8 +4,6 @@
 <link rel="import" href="../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 
-<!-- <link rel="import" href="../bower_components/firebase-element/firebase-document.html"> -->
-
 <link rel="import" href="../components/map-button.html">
 
 <dom-module id="rocket-card">
@@ -80,8 +78,6 @@
       }
     </style>
 
-    <!-- <firebase-document id="firebase" data="{{otherrocket}}" log="true"></firebase-document> -->
-
     <paper-card>
       <div class="card-content">
         <div class="distance right">
@@ -133,25 +129,21 @@
 
       ready: function () {
         var self = this;
-        var timeout;
+        var firebase = new Firebase('https://amber-torch-2600.firebaseio.com/metadata');
 
-        // this.$.firebase.location = 'https://amber-torch-2600.firebaseio.com/' + this.rocket.__firebaseKey__;
+        firebase.child(this.rocket.__firebaseKey__).on('value', function(snapshot) {
+          self.$.rocketname.textContent = (snapshot.exists()) ? snapshot.val().name : snapshot.key();
+        });
 
-        var firebase = new Firebase('https://amber-torch-2600.firebaseio.com');
-
-        this.$.rocketname.addEventListener('keydown', function (e) {
-          if (e.keyCode === 13) {
-            firebase.child(self.rocket.__firebaseKey__).update({
-              name: self.$.rocketname.textContent
-            });
-          }
+        this.$.rocketname.addEventListener('input', function (e) {
+          firebase.child(self.rocket.__firebaseKey__).update({
+            name: self.$.rocketname.textContent
+          });
         });
       },
 
       _rocketChanged: function (rocket) {
         var self = this;
-
-        this.$.rocketname.textContent = rocket.name || rocket.__firebaseKey__;
 
         if (rocket.location) {
           this.$.latitude.textContent = rocket.location.latitude;

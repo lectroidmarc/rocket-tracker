@@ -86,7 +86,7 @@
       <div class="fix content">
         <template is="dom-bind">
           <geo-location coords="{{location}}"></geo-location>
-          <firebase-collection location="https://amber-torch-2600.firebaseio.com" data="{{rockets}}"></firebase-collection>
+          <firebase-collection location="https://amber-torch-2600.firebaseio.com/rockets" data="{{rockets}}"></firebase-collection>
 
           <template is="dom-repeat" items="[[rockets]]" as="rocket">
             <rocket-card rocket="[[rocket]]" current-location="[[location]]"></rocket-card>
