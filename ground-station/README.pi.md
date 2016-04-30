@@ -23,6 +23,6 @@ Build the node modules:
 (Optional) Install the systemd system file
 
     cd ..
-    cp ground-station.service.txt /etc/systemd/system
+    sudo cp ground-station.service.txt /etc/systemd/system
 
 -30-
