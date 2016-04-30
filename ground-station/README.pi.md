@@ -13,6 +13,8 @@ Install git:
 
 Clone this repo.
 
+    git clone https://github.com/lectroidmarc/rocket-tracker.git
+
 Build the node modules:
 
     cd rocket-tracker/ground-station/node
@@ -22,5 +24,5 @@ Build the node modules:
 
     cd ..
     cp ground-station.service.txt /etc/systemd/system
-    
+
 -30-
