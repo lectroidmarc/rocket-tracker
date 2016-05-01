@@ -140,6 +140,11 @@
             name: self.$.rocketname.textContent
           });
         });
+
+        var hidden = (localStorage.hidden) ? JSON.parse(localStorage.hidden) : {};
+        if (hidden[this.rocket.__firebaseKey__]) {
+          self.style.display = 'none';
+        }
       },
 
       _rocketChanged: function (rocket) {
@@ -189,10 +194,23 @@
       hideCard: function () {
         var self = this;
 
+        var hidden = (localStorage.hidden) ? JSON.parse(localStorage.hidden) : {};
+        hidden[this.rocket.__firebaseKey__] = true;
+        localStorage.hidden = JSON.stringify(hidden);
+
         this.style.opacity = 0;
         setTimeout(function () {
          self.style.display = 'none';
         }, 1000);
+      },
+
+      showCard: function () {
+        var hidden = (localStorage.hidden) ? JSON.parse(localStorage.hidden) : {};
+        delete hidden[this.rocket.__firebaseKey__];
+        localStorage.hidden = JSON.stringify(hidden);
+
+        this.style.opacity = 1;
+        this.style.display = 'block';
       },
 
       calculateDistance: function (source, dest) {

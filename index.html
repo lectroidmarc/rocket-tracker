@@ -16,6 +16,7 @@
 
     <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
     <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 
     <link rel="import" href="bower_components/firebase-element/firebase-collection.html">
 
@@ -81,6 +82,7 @@
     <paper-header-panel mode="standard">
       <paper-toolbar>
         <span class="title">Rocket Tracker</span>
+        <paper-icon-button id="showAll" icon="icons:more-vert"></paper-icon-button>
       </paper-toolbar>
 
       <div class="fix content">
@@ -94,5 +96,14 @@
         </template>
       </div>
     </paper-header-panel>
+
+    <script>
+      document.querySelector('#showAll').addEventListener('click', function () {
+        var cards = document.querySelectorAll('rocket-card');
+        Array.prototype.forEach.call(cards, function (card) {
+          card.showCard();
+        });
+      });
+    </script>
   </body>
 </html>
