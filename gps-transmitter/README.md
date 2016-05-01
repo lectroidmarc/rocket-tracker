@@ -10,6 +10,6 @@ The M0 is the preferred platform as it can report battery level as well as provi
 
 Configuration is handled in `config.h`.  Uncomment the block that matches the XBee radio type you have.  There are different blocks for each supported XBee radio type so only uncomment one set at a time.
 
-For the Fio v3, set the GPS pins you wish to use (remember on the Fio, only certain pins can be used to SoftwareSerial) but on the M0 pins 10 and 12 are mapped to `Seriall2`, and the GPS is set to use that.
+For the Fio v3, set the GPS pins you wish to use (remember on the Fio, only certain pins can be used for recieving under SoftwareSerial). On the M0 pins 10 and 12 are mapped to `Serial2`, and the GPS is hardcoded to use that.
 
 -30-
