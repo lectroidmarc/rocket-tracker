@@ -202,6 +202,10 @@
         setTimeout(function () {
          self.style.display = 'none';
         }, 1000);
+
+        this.fire('rockethide', {
+          rocket: this.rocket.__firebaseKey__
+        });
       },
 
       showCard: function () {

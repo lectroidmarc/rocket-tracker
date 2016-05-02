@@ -46,6 +46,10 @@
         color: white;
       }
 
+      paper-header-panel paper-toolbar paper-icon-button {
+        visibility: hidden;
+      }
+
       rocket-card {
         display: block;
         margin: 15px auto;
@@ -83,7 +87,7 @@
     <paper-header-panel mode="standard">
       <paper-toolbar>
         <span class="title">Rocket Tracker</span>
-        <paper-icon-button id="showAll" icon="av:playlist-add-check"></paper-icon-button>
+        <paper-icon-button id="showAll" icon="av:playlist-add-check" title="Show Hidden Rockets"></paper-icon-button>
       </paper-toolbar>
 
       <div class="fix content">
@@ -99,11 +103,24 @@
     </paper-header-panel>
 
     <script>
+      document.addEventListener('DOMContentLoaded', function(event) {
+        var hidden = (localStorage.hidden) ? JSON.parse(localStorage.hidden) : {};
+        if (Object.keys(hidden).length > 0) {
+          document.querySelector('#showAll').style.visibility = 'visible';
+        }
+      });
+
       document.querySelector('#showAll').addEventListener('click', function () {
         var cards = document.querySelectorAll('rocket-card');
         Array.prototype.forEach.call(cards, function (card) {
           card.showCard();
         });
+        localStorage.removeItem('hidden');
+        document.querySelector('#showAll').style.visibility = 'hidden';
+      });
+
+      document.addEventListener('rockethide', function(event) {
+        document.querySelector('#showAll').style.visibility = 'visible';
       });
     </script>
   </body>
