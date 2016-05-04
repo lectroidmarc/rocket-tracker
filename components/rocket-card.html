@@ -89,7 +89,7 @@
           <span id="rocketname" class="rocketname" contenteditable>[[name]]</span>
         </div>
 
-        <div id="status" class="status right"></div>
+        <div id="status" class="status right inactive"></div>
 
         <div class="location">
           Location: <span id="latitude">---</span>, <span id="longitude">---</span>
@@ -177,11 +177,14 @@
           this.$.distance.textContent = Math.round(distance).toLocaleString('en-US') + 'ft';
         }
 
-        clearTimeout(this._timeout);
-        this.$.status.classList.remove('inactive');
-        this._timeout = setTimeout(function () {
-          self.$.status.classList.add('inactive');
-        }, 10000);
+        if (rocket.time > Date.now() - 15000) {
+          this.$.status.classList.remove('inactive');
+
+          clearTimeout(this._timeout);
+          this._timeout = setTimeout(function () {
+            self.$.status.classList.add('inactive');
+          }, 10000);
+        }
       },
 
       _locationChanged: function (currentLocation) {
