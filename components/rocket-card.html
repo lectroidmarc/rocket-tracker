@@ -86,7 +86,7 @@
         </div>
 
         <div class="header">
-          <span id="rocketname" class="rocketname" contenteditable></span>
+          <span id="rocketname" class="rocketname" contenteditable>[[name]]</span>
         </div>
 
         <div id="status" class="status right"></div>
@@ -103,7 +103,7 @@
       </div>
 
       <div class="card-actions">
-        <map-button rocket="[[rocket]]"></map-button>
+        <map-button rocket="[[rocket]]" name="[[name]]"></map-button>
         <paper-button class="right" on-tap="hideCard">
           <iron-icon icon="icons:clear"></iron-icon>
           Hide
@@ -132,7 +132,7 @@
         var firebase = new Firebase('https://amber-torch-2600.firebaseio.com/metadata');
 
         firebase.child(this.rocket.__firebaseKey__).on('value', function(snapshot) {
-          self.$.rocketname.textContent = (snapshot.exists()) ? snapshot.val().name : snapshot.key();
+          self.name = (snapshot.exists()) ? snapshot.val().name : snapshot.key();
         });
 
         this.$.rocketname.addEventListener('input', function (e) {
