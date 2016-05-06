@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 
+<link rel="import" href="../components/geo-distance.html">
 <link rel="import" href="../components/map-button.html">
 
 <dom-module id="rocket-card">
@@ -80,10 +81,9 @@
 
     <paper-card>
       <div class="card-content">
-        <div class="distance right">
+        <geo-distance to-position="[[rocket.location]]" class="distance right">
           <iron-icon icon="communication:location-on"></iron-icon>
-          <span id="distance">---</span>
-        </div>
+        </geo-distance>
 
         <div class="header">
           <span id="rocketname" class="rocketname" contenteditable>[[name]]</span>
@@ -123,10 +123,6 @@
         },
         name: {
           type: String
-        },
-        currentLocation: {
-          type: Object,
-          observer: '_locationChanged'
         }
       },
 
@@ -175,11 +171,6 @@
         var date = new Date(rocket.time);
         this.$.prettydate.textContent = date.toLocaleString();
 
-        if (rocket.fix && this.currentLocation) {
-          var distance = this.calculateDistance(this.currentLocation, rocket.location);
-          this.$.distance.textContent = Math.round(distance).toLocaleString('en-US') + 'ft';
-        }
-
         if (rocket.time > Date.now() - 15000) {
           this.$.status.classList.remove('inactive');
 
@@ -187,13 +178,6 @@
           this._timeout = setTimeout(function () {
             self.$.status.classList.add('inactive');
           }, 10000);
-        }
-      },
-
-      _locationChanged: function (currentLocation) {
-        if (this.rocket.fix) {
-          var distance = this.calculateDistance(currentLocation, this.rocket.location);
-          this.$.distance.textContent = Math.round(distance).toLocaleString('en-US') + 'ft';
         }
       },
 
@@ -221,28 +205,7 @@
 
         this.style.opacity = 1;
         this.style.display = 'block';
-      },
-
-      calculateDistance: function (source, dest) {
-        // haversine formula
-        var R = 20903520; // Earth radius, feet
-
-        var φ1 = source.latitude.toRadians();
-        var φ2 = dest.latitude.toRadians();
-        var Δφ = (dest.latitude - source.latitude).toRadians();
-        var Δλ = (dest.longitude - source.longitude).toRadians();
-
-        var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                Math.cos(φ1) * Math.cos(φ2) *
-                Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return R * c;
       }
     });
-
-    if (Number.prototype.toRadians === undefined) {
-      Number.prototype.toRadians = function() { return this * Math.PI / 180; };
-    }
   </script>
 </dom-module>

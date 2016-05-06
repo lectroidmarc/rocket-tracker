@@ -21,7 +21,6 @@
 
     <link rel="import" href="bower_components/firebase-element/firebase-collection.html">
 
-    <link rel="import" href="components/geo-location.html">
     <link rel="import" href="components/rocket-card.html">
 
     <style is="custom-style">
@@ -92,11 +91,10 @@
 
       <div class="fix content">
         <template is="dom-bind">
-          <geo-location coords="{{location}}"></geo-location>
           <firebase-collection location="https://amber-torch-2600.firebaseio.com/rockets" data="{{rockets}}"></firebase-collection>
 
           <template is="dom-repeat" items="[[rockets]]" as="rocket">
-            <rocket-card rocket="[[rocket]]" current-location="[[location]]"></rocket-card>
+            <rocket-card rocket="[[rocket]]"></rocket-card>
           </template>
         </template>
       </div>
