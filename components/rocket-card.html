@@ -131,7 +131,7 @@
         var firebase = new Firebase('https://amber-torch-2600.firebaseio.com/metadata');
 
         firebase.child(this.rocket.__firebaseKey__).on('value', function(snapshot) {
-          self.name = (snapshot.exists()) ? snapshot.val().name : snapshot.key();
+          self.name = (snapshot.exists() && snapshot.val().name) ? snapshot.val().name : snapshot.key();
         });
 
         this.$.rocketname.addEventListener('input', function (e) {
