@@ -4,7 +4,7 @@
 
 var SerialPort = require('serialport').SerialPort;
 var xbee_api = require('xbee-api');
-var Firebase = require('firebase');
+var firebase = require('firebase');
 
 var config = require('./config');
 
@@ -69,13 +69,9 @@ serialport.on('error', function (e) {
   process.exit(1);
 });
 
-var firebase = new Firebase(config.firebase.url + '/rockets');
-firebase.authWithCustomToken(config.firebase.secret, function(error, authData) {
-  if (error) {
-    console.log('Login Failed!', error);
-  } else {
-    //firebase.set({}); // This nukes the DB.  We probably want to make this a fancy option in our web app.
-  }
+firebase.initializeApp({
+  serviceAccount: __dirname + '/firebase-credentials.json',
+  databaseURL: 'https://amber-torch-2600.firebaseio.com/'
 });
 
 xbeeAPI.on('frame_object', function(frame) {
@@ -85,7 +81,7 @@ xbeeAPI.on('frame_object', function(frame) {
     var statusByte = frame.data.readUInt8(0);
 
     var data = {
-      time: Firebase.ServerValue.TIMESTAMP,
+      time: firebase.database.ServerValue.TIMESTAMP,
       fix: (statusByte & 0x01) ? true : false
     };
 
@@ -123,7 +119,7 @@ xbeeAPI.on('frame_object', function(frame) {
       };
     }
 
-    firebase.child(frame.remote64).update(data);
+    firebase.database().ref('rockets/' + frame.remote64).update(data);
   } else if (frame.type === C.FRAME_TYPE.AT_COMMAND_RESPONSE) {
     if (frame.commandStatus !== C.COMMAND_STATUS.OK) {
       console.log('>>', frame);

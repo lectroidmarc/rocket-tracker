@@ -1,6 +1,6 @@
 # Ground Station
 
-This is a [NodeJS](https://nodejs.org/en/) app to handle incoming location data from an XBee radio and output it to [Firebase](https://www.firebase.com/).  This assumes a working network connection of course ;).
+This is a [NodeJS](https://nodejs.org) app to handle incoming location data from an XBee radio and output it to [Firebase](https://firebase.google.com).  This assumes a working network connection of course ;).
 
 ### Configuration
 
@@ -8,7 +8,9 @@ Rename the `config.sample.js` file to `config.js` and edit what needs to be edit
 
 There are different blocks for each supported XBee radio type, XBee Series 1, XBee-PRO 900 and XBee Zigbee modules.  Many options are duplicated for so only uncomment one set at a time.
 
-Then start the listener with:
+To talk to Firebase, the node app assumes you have a valid [Service Account key file](https://firebase.google.com/docs/server/setup#prerequisites) saved to `firebase-credentials.json`.
+
+Start the listener with:
 
     # node node/app
 

@@ -16,7 +16,7 @@ The system is made up of the following components:
 
 * ##### The Ground Station
 
-  The ground station listens for location messages from the transmitters and then forwards their location to a [Firebase](https://www.firebase.com/) based database.
+  The ground station listens for location messages from the transmitters and then forwards their location to a [Firebase](https://firebase.google.com) based database.
 
   If ZigBee radios are used, the ground station is also the network coordinator.
 
