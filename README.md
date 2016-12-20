@@ -2,7 +2,7 @@
 
 This is the code for a *Rocket Tracking System*, that is a system for tracking (lost) model rockets via GPS.
 
-The idea is that a GPS transmitter will live in a rocket and transmit data to a ground station via radio.  That ground station will then update a "cloud" based data store with the location(s) of the rocket(s).  A user (or users) can then access that data with an internel connected device (phone, tablet, laptop etc) to see the locations of their rockets.
+The idea is that a GPS transmitter will live in a rocket and transmit data to a ground station via radio.  That ground station will then update a "cloud" based data store with the location(s) of the rocket(s).  A user (or users) can then access that data with any internet connected device (phone, tablet, laptop etc) to see the locations of their rockets.
 
 This system should be able to be used by individuals for tracking one or more rockets or by large groups for tracking larger numbers of rockets.
 
