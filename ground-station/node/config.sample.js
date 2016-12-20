@@ -4,8 +4,7 @@
 
 var config = {
   firebase: {
-    url: 'https://<YOUR-FIREBASE-APP>.firebaseio.com',
-    secret: '<YOUR-FIREBASE-SECRET>'
+    databaseURL: "https://<DATABASE_NAME>.firebaseio.com"
   },
   xbee: {
     serial_port: '/dev/ttyMFD1'           // Edison Serial1: /dev/ttyMFD1

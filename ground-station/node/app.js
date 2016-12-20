@@ -2,9 +2,9 @@
  *
  */
 
-var SerialPort = require('serialport').SerialPort;
+var SerialPort = require('serialport');
 var xbee_api = require('xbee-api');
-var firebase = require('firebase');
+var firebaseAdmin = require("firebase-admin");
 
 var config = require('./config');
 
@@ -69,10 +69,12 @@ serialport.on('error', function (e) {
   process.exit(1);
 });
 
-firebase.initializeApp({
-  serviceAccount: __dirname + '/firebase-credentials.json',
-  databaseURL: 'https://amber-torch-2600.firebaseio.com/'
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(__dirname + '/firebase-credentials.json'),
+  databaseURL: config.firebase.databaseURL
+
 });
+//firebase.initializeApp(config.firebase);
 
 xbeeAPI.on('frame_object', function(frame) {
   //console.log(">>", frame);
@@ -81,7 +83,7 @@ xbeeAPI.on('frame_object', function(frame) {
     var statusByte = frame.data.readUInt8(0);
 
     var data = {
-      time: firebase.database.ServerValue.TIMESTAMP,
+      time: firebaseAdmin.database.ServerValue.TIMESTAMP,
       fix: (statusByte & 0x01) ? true : false
     };
 
@@ -119,7 +121,7 @@ xbeeAPI.on('frame_object', function(frame) {
       };
     }
 
-    firebase.database().ref('rockets/' + frame.remote64).update(data);
+    firebaseAdmin.database().ref('rockets/' + frame.remote64).update(data);
   } else if (frame.type === C.FRAME_TYPE.AT_COMMAND_RESPONSE) {
     if (frame.commandStatus !== C.COMMAND_STATUS.OK) {
       console.log('>>', frame);
