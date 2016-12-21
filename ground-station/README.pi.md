@@ -2,7 +2,7 @@
 
 Install and setup [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/).
 
-Install NodeJS _assumes Node 6.9.2 on a Pi 1 (armv6)_:
+Install NodeJS _(assumes Node 6.9.2 on a Pi 1 (armv6))_:
 
     wget https://nodejs.org/dist/latest-v6.x/node-v6.9.2-linux-armv6l.tar.xz
     sudo tar -xf node-v6.9.2-linux-armv6l.tar.xz -C /usr/local --strip-components=1
