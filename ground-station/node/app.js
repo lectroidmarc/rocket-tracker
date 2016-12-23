@@ -4,7 +4,8 @@
 
 var SerialPort = require('serialport');
 var xbee_api = require('xbee-api');
-var firebaseAdmin = require("firebase-admin");
+var firebaseAdmin = require('firebase-admin');
+var firebaseServiceAccountKey = require('./serviceAccountKey.json');
 
 var config = require('./config');
 
@@ -70,11 +71,9 @@ serialport.on('error', function (e) {
 });
 
 firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(__dirname + '/firebase-credentials.json'),
+  credential: firebaseAdmin.credential.cert(firebaseServiceAccountKey),
   databaseURL: config.firebase.databaseURL
-
 });
-//firebase.initializeApp(config.firebase);
 
 xbeeAPI.on('frame_object', function(frame) {
   //console.log(">>", frame);
