@@ -35,11 +35,11 @@ var RocketMap = {
     });
 
     navigator.geolocation.getCurrentPosition(function(position) {
-      self._bounds.extend({
+      self._selfMarker.setPosition({
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
-      self._selfMarker.setPosition({
+      self._bounds.extend({
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
@@ -57,6 +57,10 @@ var RocketMap = {
     var center = this._map.getCenter();
     google.maps.event.trigger(this._map, 'resize');
     this._map.setCenter(center);
+  },
+
+  recenter: function () {
+    this._map.fitBounds(this._bounds);
   },
 
   addRocket: function (id, location) {
@@ -85,7 +89,6 @@ var RocketMap = {
     });
 
     this._bounds.extend(marker.getPosition());
-    this._map.panToBounds(this._bounds);
 
     this._markers[id] = marker;
   },
@@ -99,7 +102,6 @@ var RocketMap = {
     });
 
     this._bounds.extend(marker.getPosition());
-    this._map.panToBounds(this._bounds);
   },
 
   updateRocketName: function (id, name) {

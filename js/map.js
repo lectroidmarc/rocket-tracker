@@ -9,6 +9,7 @@ RocketMap.init(mapElement);
 var observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
     RocketMap.resize();
+    RocketMap.recenter();
   });
 });
 
