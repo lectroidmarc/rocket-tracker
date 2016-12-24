@@ -1,5 +1,3 @@
-// jshint esversion: 6
-
 /**
  *
  */
@@ -42,9 +40,9 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   };
 
   var upgradableButtons = card.querySelectorAll('button.mdl-js-button');
-  for (var button of upgradableButtons) {
+  Array.prototype.forEach.call(upgradableButtons, function (button) {
     componentHandler.upgradeElement(button);
-  }
+  });
 });
 
 firebase.database().ref('rockets').on('child_changed', function(snapshot) {
