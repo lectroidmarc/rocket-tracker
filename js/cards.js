@@ -20,6 +20,7 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   var cardContent = document.querySelector('#rocket-card').content;
   card.appendChild(document.importNode(cardContent, true));
 
+  card.querySelector('.mdl-card__title-text').textContent = snapshot.key;
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
   card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
