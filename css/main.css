@@ -1,0 +1,48 @@
+/**
+ *
+ */
+
+body {
+  -webkit-font-smoothing: antialiased
+}
+
+main {
+  background-color: #eee;
+}
+
+geo-distance {
+  display: inline;
+}
+
+[contenteditable]:active,
+[contenteditable]:focus{
+  border: none;
+  border-bottom: 1px solid rgb(96,125,139);
+  outline: none;
+}
+
+.rocket {
+  min-height: initial;
+  width: 100%;
+}
+
+.rocket .fix {
+  margin-right: 5px;
+}
+.rocket .location {
+  font-size: 16px;
+}
+
+.rocket .updated {
+  font-size: 12px;
+  font-style: italic;
+}
+
+#map-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+

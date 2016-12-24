@@ -8,10 +8,10 @@ module.exports = function(grunt) {
       server: {
         options: {
           base: '..',
-          port: 8001,
+          port: 8000,
           protocol: 'http2',
-          livereload: 35730,
-          open: 'https://localhost:8001',
+          livereload: true,
+          open: 'https://localhost:8000',
           middleware: function(connect, options, middlewares) {
             middlewares.unshift(function(req, res, next) {
               if (req.url === '/manifest.json') {
@@ -28,14 +28,19 @@ module.exports = function(grunt) {
     watch: {
       options: {
         livereload: {
-          port: 35730,
           key: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.key'),
           cert: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.crt')
         },
         livereloadOnError: false
       },
       html: {
-        files: ['../index.html', '../components/*.html']
+        files: ['../index.html']
+      },
+      js: {
+        files: ['../js/*.js']
+      },
+      css: {
+        files: ['../css/*.css']
       }
     }
   });
