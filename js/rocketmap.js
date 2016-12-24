@@ -10,7 +10,11 @@ var RocketMap = {
 
     this._map = new google.maps.Map(dom_element, {
       zoom: 18,
-      center: {lat: 37.949528, lng: -120.797179}
+      center: {
+        lat: 37.949528,
+        lng: -120.797179
+      },
+      streetViewControl: false
     });
 
     google.maps.event.addDomListener(window, 'resize', function() {
