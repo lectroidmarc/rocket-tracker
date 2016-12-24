@@ -9,8 +9,8 @@ var RocketMap = {
     var self = this;
 
     this._map = new google.maps.Map(dom_element, {
-      zoom: 20,
-      center: {lat: 38.699838, lng: -120.999026}
+      zoom: 18,
+      center: {lat: 37.949528, lng: -120.797179}
     });
 
     google.maps.event.addDomListener(window, 'resize', function() {
