@@ -25,9 +25,13 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
 
   card.querySelector('h2').oninput = function (e) {
-    firebase.database().ref().child('metadata/' + snapshot.key).update({
-      name: e.target.textContent
-    });
+    if (e.target.textContent !== '') {
+      firebase.database().ref().child('metadata/' + snapshot.key).update({
+        name: e.target.textContent
+      });
+    } else {
+      firebase.database().ref().child('metadata/' + snapshot.key).remove();
+    }
   };
   card.querySelector('geo-distance').location = rocket.location;
   card.querySelector('.show-map').onclick = function () {
