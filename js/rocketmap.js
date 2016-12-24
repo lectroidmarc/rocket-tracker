@@ -47,14 +47,14 @@ var RocketMap = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
-    });
+    }, function () {}, {enableHighAccuracy: true});
 
     navigator.geolocation.watchPosition(function (position) {
       self._selfMarker.setPosition({
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
-    });
+    }, function () {}, {enableHighAccuracy: true});
   },
 
   resize: function () {
