@@ -67,6 +67,15 @@ var RocketMap = {
     this._map.fitBounds(this._bounds);
   },
 
+  rebound: function () {
+    this._bounds = new google.maps.LatLngBounds();
+    for (var id in this._markers) {
+      if (this._markers[id].getMap()) {
+        this._bounds.extend(this._markers[id].getPosition());
+      }
+    }
+  },
+
   addRocket: function (id, location) {
     var self = this;
 
@@ -122,9 +131,31 @@ var RocketMap = {
     }, 3000);
   },
 
+  hideRocket: function (id) {
+    if (id in this._markers) {
+      this._markers[id].setMap();
+      this.rebound();
+    }
+  },
+
+  showRocket: function (id) {
+    if (id in this._markers) {
+      this._markers[id].setMap(this._map);
+      this._bounds.extend(this._markers[id].getPosition());
+    }
+  },
+
+  showAllRockets: function () {
+    for (var id in this._markers) {
+      if (!this._markers[id].getMap()) {
+        this.showRocket(id);
+      }
+    }
+  },
+
   removeRocket: function (id) {
     if (id in this._markers) {
-      this._markers[id].setMap(null);
+      this.hideRocket(id);
       delete this._markers[id];
     }
   }

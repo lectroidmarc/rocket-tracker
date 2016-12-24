@@ -45,14 +45,12 @@
         </div>
       </header>
 
-      <!-- <div class="mdl-layout__drawer">
-        <span class="mdl-layout__title">Simple Layout</span>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout__title">Settings</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="#">Nav link 1</a>
-          <a class="mdl-navigation__link" href="#">Nav link 2</a>
-          <a class="mdl-navigation__link" href="#">Nav link 3</a>
+          <span class="mdl-navigation__link show-hidden"><i class="material-icons">build</i> Show Hidden</span>
         </nav>
-      </div> -->
+      </div>
 
       <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="card-view">
@@ -71,6 +69,10 @@
             <div class="mdl-card__actions mdl-card--border">
               <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect show-map">
                 <i class="material-icons">directions</i> Map
+              </button>
+
+              <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect hide">
+                <i class="material-icons">close</i> Hide
               </button>
             </div>
           </template>
@@ -102,5 +104,6 @@
     <script src="js/rocketmap.js"></script>
     <script src="js/cards.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/misc.js"></script>
   </body>
 </html>

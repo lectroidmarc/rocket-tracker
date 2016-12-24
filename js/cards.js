@@ -36,6 +36,10 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
     document.querySelector('.mdl-layout__tab-bar a:nth-child(2)').click();
     RocketMap.highlightRocket(snapshot.key);
   };
+  card.querySelector('.hide').onclick = function () {
+    cell.classList.add('hidden');
+    RocketMap.hideRocket(snapshot.key);
+  };
 
   var upgradableButtons = card.querySelectorAll('button.mdl-js-button');
   for (var button of upgradableButtons) {

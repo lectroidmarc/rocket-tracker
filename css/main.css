@@ -18,6 +18,10 @@ geo-distance {
   display: none;
 }
 
+.mdl-layout__drawer span.mdl-navigation__link {
+  cursor: pointer;
+}
+
 [contenteditable]:active,
 [contenteditable]:focus{
   border: none;
@@ -50,3 +54,6 @@ geo-distance {
   left: 0;
 }
 
+.hidden {
+  display: none;
+}
