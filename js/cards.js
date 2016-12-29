@@ -20,21 +20,27 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   var cardContent = document.querySelector('#rocket-card').content;
   card.appendChild(document.importNode(cardContent, true));
 
-  card.querySelector('.mdl-card__title-text').textContent = snapshot.key;
-  card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
-  card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
-  card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
-
-  card.querySelector('h2').oninput = function (e) {
+  var titleText = card.querySelector('.mdl-card__title-text');
+  titleText.textContent = snapshot.key;
+  titleText.oninput = function (e) {
     if (e.target.textContent !== '') {
       firebase.database().ref().child('metadata/' + snapshot.key).update({
         name: e.target.textContent
+      }).catch(function (error) {
+        showToastAlert(error.message);
       });
     } else {
-      firebase.database().ref().child('metadata/' + snapshot.key).remove();
+      firebase.database().ref().child('metadata/' + snapshot.key).remove().catch(function (error) {
+        showToastAlert(error.message);
+      });
     }
   };
+  titleText.contentEditable = (firebase.auth().currentUser) ? true : false;
+
+  card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
+  card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
   card.querySelector('geo-distance').location = rocket.location;
+  card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
   card.querySelector('.show-map').onclick = function () {
     document.querySelector('.mdl-layout__tab-bar a:nth-child(2)').click();
     RocketMap.highlightRocket(snapshot.key);

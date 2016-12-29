@@ -22,8 +22,7 @@ geo-distance {
   cursor: pointer;
 }
 
-[contenteditable]:active,
-[contenteditable]:focus{
+[contenteditable]:focus {
   border: none;
   border-bottom: 1px solid rgb(96,125,139);
   outline: none;

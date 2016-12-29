@@ -49,6 +49,8 @@
         <span class="mdl-layout__title">Settings</span>
         <nav class="mdl-navigation">
           <span class="mdl-navigation__link show-hidden"><i class="material-icons">build</i> Show Hidden</span>
+          <span class="mdl-navigation__link login"><i class="material-icons">face</i> Login</span>
+          <span class="mdl-navigation__link logout"><i class="material-icons">highlight_off</i> Logout</span>
         </nav>
       </div>
 
@@ -57,7 +59,7 @@
           <template id="rocket-card">
             <div class="mdl-card__title">
               <i class="material-icons mdl-button--primary fix">gps_not_fixed</i>
-              <h2 class="mdl-card__title-text" contentEditable></h2>
+              <h2 class="mdl-card__title-text"></h2>
             </div>
 
             <div class="mdl-card__supporting-text">
@@ -82,6 +84,11 @@
 
         <section class="mdl-layout__tab-panel" id="map-view"></section>
       </main>
+
+      <div class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.23/CustomElements.min.js"></script>
@@ -104,6 +111,7 @@
     <script src="js/rocketmap.js"></script>
     <script src="js/cards.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/misc.js"></script>
   </body>
 </html>
