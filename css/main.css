@@ -22,17 +22,17 @@ geo-distance {
   cursor: pointer;
 }
 
-[contenteditable]:focus {
-  border: none;
-  border-bottom: 1px solid rgb(96,125,139);
-  outline: none;
-}
-
 .rocket {
   min-height: initial;
   width: 100%;
 }
-
+.rocket .mdl-card__title-text {
+  border: 1px solid #fff;
+}
+.rocket .mdl-card__title-text[contenteditable]:focus {
+  border-bottom-color: rgb(96,125,139);
+  outline: none;
+}
 .rocket .fix {
   margin-right: 5px;
 }

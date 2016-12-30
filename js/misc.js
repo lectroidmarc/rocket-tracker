@@ -17,4 +17,6 @@ document.querySelector('.show-hidden').onclick = function () {
 
   RocketMap.showAllRockets();
   RocketMap.recenter();
+
+  document.body.querySelector('.mdl-layout__obfuscator.is-visible').click();
 };
