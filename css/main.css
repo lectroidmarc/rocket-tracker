@@ -27,11 +27,12 @@ geo-distance {
   width: 100%;
 }
 .rocket .mdl-card__title-text {
-  border: 1px solid #fff;
+  padding-bottom: 2px;
 }
 .rocket .mdl-card__title-text[contenteditable]:focus {
-  border-bottom-color: rgb(96,125,139);
+  border-bottom: 2px solid rgb(96,125,139);
   outline: none;
+  padding: 0;
 }
 .rocket .fix {
   margin-right: 5px;
