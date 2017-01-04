@@ -32,7 +32,11 @@ document.registerElement('geo-distance', {
      value: function () {
         if (this.source && this.location) {
           var distance = this.haversine(this.source, this.location);
-          this.textContent = Math.round(distance).toLocaleString('en-US') + 'ft';
+          if (distance > 10000) {
+            this.textContent = (Math.round(distance / 528.0) / 10).toLocaleString('en-US') + ' mi';
+          } else {
+            this.textContent = Math.round(distance).toLocaleString('en-US') + ' ft';
+          }
         }
       }
     },
