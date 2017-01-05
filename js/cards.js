@@ -14,7 +14,7 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
 
   var card = document.createElement('div');
   card.id = snapshot.key;
-  card.className = 'mdl-card mdl-shadow--2dp rocket';
+  card.className = 'mdl-card rocket';
   cell.appendChild(card);
 
   var cardContent = document.querySelector('#rocket-card').content;
@@ -68,6 +68,7 @@ firebase.database().ref('rockets').on('child_changed', function(snapshot) {
   var rocket = snapshot.val();
   var card = document.getElementById(snapshot.key);
   var updatedDate = new Date(rocket.time);
+
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
   if (rocket.battery && rocket.battery >= 30) {
     card.querySelector('.battery').textContent = 'battery_full';
@@ -78,6 +79,12 @@ firebase.database().ref('rockets').on('child_changed', function(snapshot) {
   }
   card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
+
+  clearTimeout(card.timeout);
+  card.classList.add('active', 'mdl-shadow--6dp');
+  card.timeout = setTimeout(function () {
+    card.classList.remove('active', 'mdl-shadow--6dp');
+  }, 6000);
 });
 
 firebase.database().ref('rockets').on('child_removed', function(snapshot) {

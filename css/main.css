@@ -24,7 +24,11 @@ geo-distance {
 
 .rocket {
   min-height: initial;
+  transition: box-shadow 2s;
   width: 100%;
+}
+.rocket.active {
+  transition: box-shadow 0s;
 }
 .rocket .mdl-card__title-text {
   flex-grow: 2;
