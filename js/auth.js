@@ -17,16 +17,16 @@ document.querySelector('.login').onclick = function () {
   provider.addScope('https://www.googleapis.com/auth/userinfo.email');
 
   firebase.auth().signInWithPopup(provider).then(function(result) {
-    document.body.querySelector('.mdl-layout__obfuscator.is-visible').click();
+    closeDrawer();
     showToastAlert('Successfully Logged In.');
   }).catch(function (error) {
-    document.body.querySelector('.mdl-layout__obfuscator.is-visible').click();
+    closeDrawer();
     showToastAlert(error.message);
   });
 };
 
 document.querySelector('.logout').onclick = function () {
-  document.body.querySelector('.mdl-layout__obfuscator.is-visible').click();
+  closeDrawer();
   firebase.auth().signOut().then(function() {
     showToastAlert('Successfully Logged Out.');
   }).catch(function (error) {

@@ -57,3 +57,11 @@ geo-distance {
 .hidden {
   display: none;
 }
+
+.disabled {
+  cursor: initial !important;
+  opacity: 0.5;
+}
+.disabled:hover {
+  background-color: transparent !important;
+}

@@ -41,13 +41,16 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
   card.querySelector('geo-distance').location = rocket.location;
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
+
   card.querySelector('.show-map').onclick = function () {
     document.querySelector('.mdl-layout__tab-bar a:nth-child(2)').click();
     RocketMap.highlightRocket(snapshot.key);
   };
+
   card.querySelector('.hide').onclick = function () {
     cell.classList.add('hidden');
     RocketMap.hideRocket(snapshot.key);
+    document.querySelector('.show-hidden').classList.remove('disabled');
   };
 
   var upgradableButtons = card.querySelectorAll('button.mdl-js-button');

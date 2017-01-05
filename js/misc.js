@@ -9,14 +9,21 @@ var showToastAlert = function (message) {
   });
 };
 
+var closeDrawer = function () {
+  document.querySelector('.mdl-layout__obfuscator.is-visible').click();
+};
+
 document.querySelector('.show-hidden').onclick = function () {
-  var hiddenCells = document.querySelectorAll('main .rockets .mdl-cell.hidden');
-  Array.prototype.forEach.call(hiddenCells, function (cell) {
-    cell.classList.remove('hidden');
-  });
+  if (!this.classList.contains('disabled')) {
+    var hiddenCells = document.querySelectorAll('main .rockets .mdl-cell.hidden');
+    Array.prototype.forEach.call(hiddenCells, function (cell) {
+      cell.classList.remove('hidden');
+    });
 
-  RocketMap.showAllRockets();
-  RocketMap.recenter();
+    RocketMap.showAllRockets();
+    RocketMap.recenter();
 
-  document.body.querySelector('.mdl-layout__obfuscator.is-visible').click();
+    closeDrawer();
+    this.classList.add('disabled');
+  }
 };
