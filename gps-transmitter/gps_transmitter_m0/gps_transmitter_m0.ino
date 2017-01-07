@@ -42,7 +42,7 @@ void SERCOM1_Handler() {
 }
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
 
   Serial1.begin(9600);
   xbee.setSerial(Serial1);
@@ -81,6 +81,8 @@ void loop() {
     if (!GPS.parse(GPS.lastNMEA())) {
       return;
     }
+
+    //Serial.print(GPS.lastNMEA());
 
     // status bit 0 is fix status
     if (GPS.fix) {
@@ -157,8 +159,8 @@ void loop() {
         } else {
           digitalWrite(13, HIGH);
 
-          Serial.print("Delivery Error: 0x");
-          Serial.println(deliveryStatus, HEX);
+          //Serial.print("Delivery Error: 0x");
+          //Serial.println(deliveryStatus, HEX);
         }
       }
     }

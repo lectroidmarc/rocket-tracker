@@ -30,14 +30,16 @@ SoftwareSerial gpsSerial(GPS_TX_PIN, GPS_RX_PIN); // RX, TX
 Adafruit_GPS GPS(&gpsSerial);
 
 SIGNAL(TIMER0_COMPA_vect) {
-  char c = GPS.read();
+  GPS.read();
+  //char c = GPS.read();
+  //if (c) Serial.print(c);
 }
 
 void setup() {
   RXLED1;   // Turn off the blue RX light. Turned on when there's a GPS fix
   TXLED1;   // Turn off the yellow TX light. Turned on for XBee packet failures
 
-  Serial.begin(9600);
+  //Serial.begin(9600);
 
   Serial1.begin(9600);
   xbee.setSerial(Serial1);
@@ -96,15 +98,19 @@ void loop() {
 #ifdef XBEE_ZB
       if (xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
         xbee.getResponse().getZBTxStatusResponse(zbTxStatus);
-        if (zbTxStatus.getDeliveryStatus() == SUCCESS) {
+        uint8_t deliveryStatus = zbTxStatus.getDeliveryStatus();
 #else
       if (xbee.getResponse().getApiId() == TX_STATUS_RESPONSE) {
         xbee.getResponse().getTxStatusResponse(txStatus);
-        if (txStatus.getStatus() == SUCCESS) {
+        uint8_t deliveryStatus = txStatus.getStatus();
 #endif
+        if (deliveryStatus == SUCCESS) {
           TXLED1;
         } else {
           TXLED0;
+
+          //Serial.print("Delivery Error: 0x");
+          //Serial.println(deliveryStatus, HEX);
         }
       }
     }
