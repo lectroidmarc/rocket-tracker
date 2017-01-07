@@ -109,13 +109,16 @@ void loop() {
       gps_status &= ~(1 << 0);
     }
 
-    // status bits 1-3 are battery info
+    // status bit 1 says we have battery info
+    gps_status |= 1 << 1; // bit 1 says we have battery info
+
+    // status bits 2 - 4 are battery info
     float measuredvbat = analogRead(A7);
     measuredvbat *= 2;    // we divided by 2, so multiply back
     measuredvbat *= 3.3;  // Multiply by 3.3V, our reference voltage
     measuredvbat /= 1024; // convert to voltage
 
-    gps_status &= ~(7 << 1);  // clear bits 1 - 3
+    gps_status &= ~(7 << 2);  // clear bits 2 - 4
 
     /*
      * Battery voltage chart that seems to best match reality.
@@ -136,19 +139,19 @@ void loop() {
      */
 
     if (measuredvbat > 4.13) {
-      gps_status |= 7 << 1;   // 100%
+      gps_status |= 7 << 2;   // 100%
     } else if (measuredvbat > 4.06) {
-      gps_status |= 6 << 1;   // 90%
+      gps_status |= 6 << 2;   // 90%
     } else if (measuredvbat > 3.99) {
-      gps_status |= 5 << 1;   // 80%
+      gps_status |= 5 << 2;   // 80%
     } else if (measuredvbat > 3.85) {
-      gps_status |= 4 << 1;   // 60%
+      gps_status |= 4 << 2;   // 60%
     } else if (measuredvbat > 3.78) {
-      gps_status |= 3 << 1;   // 50%
+      gps_status |= 3 << 2;   // 50%
     } else if (measuredvbat > 3.64) {
-      gps_status |= 2 << 1;   // 30%
+      gps_status |= 2 << 2;   // 30%
     } else if (measuredvbat > 3.57) {
-      gps_status |= 1 << 1;   // 20%
+      gps_status |= 1 << 2;   // 20%
     }
 
     setPayload(gps_status, GPS.latitudeDegrees, GPS.longitudeDegrees, payload);
