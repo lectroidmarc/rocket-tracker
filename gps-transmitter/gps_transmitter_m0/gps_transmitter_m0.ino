@@ -90,7 +90,7 @@ void setup() {
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCONLY);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);
 
-  pinMode(13, OUTPUT);
+  pinMode(13, OUTPUT);  // Use the onboard LED as an error light for XBee packet failures
 }
 
 void loop() {

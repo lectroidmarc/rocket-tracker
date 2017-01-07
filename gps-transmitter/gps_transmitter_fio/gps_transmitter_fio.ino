@@ -51,8 +51,8 @@ boolean checkChecksum (char *nmea) {
 }
 
 void setup() {
-  RXLED1;   // Turn off the RX light (blue) - on when there's a GPS fix
-  TXLED1;   // Turn off the TX light (yellow) - on when there's a successful XBee response
+  RXLED1;   // Turn off the blue RX light. Turned on when there's a GPS fix
+  TXLED1;   // Turn off the yellow TX light. Turned on for XBee packet failures
 
   Serial.begin(9600);
 
@@ -122,9 +122,9 @@ void loop() {
         xbee.getResponse().getTxStatusResponse(txStatus);
         if (txStatus.getStatus() == SUCCESS) {
 #endif
-          TXLED0;
-        } else {
           TXLED1;
+        } else {
+          TXLED0;
         }
       }
     }
