@@ -38,11 +38,7 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   titleText.contentEditable = (firebase.auth().currentUser) ? true : false;
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
-  if (rocket.battery && rocket.battery >= 30) {
-    card.querySelector('.battery').textContent = 'battery_full';
-  } else if (rocket.battery && rocket.battery < 30) {
-    card.querySelector('.battery').textContent = 'battery_alert';
-  }
+  card.querySelector('battery-icon').power_level = rocket.battery;
   card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
   card.querySelector('geo-distance').location = rocket.location;
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
@@ -70,13 +66,7 @@ firebase.database().ref('rockets').on('child_changed', function(snapshot) {
   var updatedDate = new Date(rocket.time);
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
-  if (rocket.battery && rocket.battery >= 30) {
-    card.querySelector('.battery').textContent = 'battery_full';
-  } else if (rocket.battery && rocket.battery < 30) {
-    card.querySelector('.battery').textContent = 'battery_alert';
-  } else {
-    card.querySelector('.battery').textContent = 'battery_unknown';
-  }
+  card.querySelector('battery-icon').power_level = rocket.battery;
   card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
 

@@ -14,6 +14,10 @@ geo-distance {
   display: inline;
 }
 
+battery-icon path {
+  fill: rgb(96,125,139);
+}
+
 .mdl-layout:not(.is-upgraded) {
   display: none;
 }
