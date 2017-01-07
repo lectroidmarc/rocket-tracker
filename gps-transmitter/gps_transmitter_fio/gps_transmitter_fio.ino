@@ -77,6 +77,8 @@ void loop() {
       return;
     }
 
+    //Serial.print(GPS.lastNMEA());
+
     // status bit 0 is fix status
     if (GPS.fix) {
       RXLED0;
