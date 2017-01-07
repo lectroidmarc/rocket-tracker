@@ -41,23 +41,6 @@ void SERCOM1_Handler() {
   Serial2.IrqHandler();
 }
 
-boolean checkChecksum (char *nmea) {
-  if (nmea[strlen(nmea)-4] == '*') {
-    uint16_t sum = GPS.parseHex(nmea[strlen(nmea)-3]) * 16;
-    sum += GPS.parseHex(nmea[strlen(nmea)-2]);
-
-    // check checksum Note: nmea[0] == '\r' so we start at the 2nd character
-    for (uint8_t i=2; i < (strlen(nmea)-4); i++) {
-      sum ^= nmea[i];
-    }
-
-    return (sum != 0) ? false : true;
-  } else {
-    // a checksum is required
-    return false;
-  }
-}
-
 void setup() {
   Serial.begin(9600);
 
@@ -95,9 +78,6 @@ void setup() {
 
 void loop() {
   if (GPS.newNMEAreceived()) {
-    if (!checkChecksum(GPS.lastNMEA())) {
-      return;
-    }
     if (!GPS.parse(GPS.lastNMEA())) {
       return;
     }
