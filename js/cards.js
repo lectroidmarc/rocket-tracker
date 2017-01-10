@@ -86,11 +86,13 @@ firebase.database().ref('rockets').on('child_removed', function(snapshot) {
 firebase.database().ref('metadata').on('child_added', function(snapshot) {
   var card = document.getElementById(snapshot.key);
   card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;
+  sortRockets();
 });
 
 firebase.database().ref('metadata').on('child_changed', function(snapshot) {
   var card = document.getElementById(snapshot.key);
   card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;
+  sortRockets();
 });
 
 firebase.database().ref('metadata').on('child_removed', function(snapshot) {
