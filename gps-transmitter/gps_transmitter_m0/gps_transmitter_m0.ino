@@ -38,6 +38,8 @@ Adafruit_GPS GPS(&Serial2);
 // Interrupt handler for SERCOM1
 void SERCOM1_Handler() {
   GPS.read();
+  //char c = GPS.read();
+  //if (c) Serial.print(c);
   Serial2.IrqHandler();
 }
 
@@ -64,7 +66,7 @@ void setup() {
   setXBeeChannelVerification(XBEE_VERIFY_CHANNEL);
 #endif
 
-  // GPS.begin() doesn't do anything on !__AVR__
+  // GPS.begin() doesn't quite work with the SERCOM stuff...
   Serial2.begin(9600);
 
   pinPeripheral(10, PIO_SERCOM);
