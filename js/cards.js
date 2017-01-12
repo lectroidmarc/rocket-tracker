@@ -39,7 +39,7 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
   card.querySelector('battery-icon').power_level = rocket.battery;
-  card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
+  card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(5) + ', ' + rocket.location.longitude.toFixed(5);
   card.querySelector('geo-distance').location = rocket.location;
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
 
@@ -67,7 +67,7 @@ firebase.database().ref('rockets').on('child_changed', function(snapshot) {
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
   card.querySelector('battery-icon').power_level = rocket.battery;
-  card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(4) + ', ' + rocket.location.longitude.toFixed(4);
+  card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(5) + ', ' + rocket.location.longitude.toFixed(5);
   card.querySelector('geo-distance').location = rocket.location;
   card.querySelector('.updated').textContent = 'Last Updated: ' + updatedDate.toLocaleString();
 
