@@ -9,8 +9,8 @@ document.registerElement('battery-icon', {
       set: function (val) {
         this._power_level = val;
 
-        var icon = this.querySelector(':first-child');
-        var percentage = this.querySelector(':last-child');
+        var icon = this.querySelector('div:first-child');
+        var percentage = this.querySelector('div:last-child');
 
         if (this._power_level) {
           this.title = this._power_level + '%';
