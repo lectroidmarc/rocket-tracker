@@ -35,6 +35,14 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
       });
     }
   };
+  titleText.onfocus = function () {
+    this.dataOriginalTextContent = this.textContent;
+  };
+  titleText.onblur = function () {
+    if (this.dataOriginalTextContent !== this.textContent) {
+      sortRockets();
+    }
+  };
   titleText.contentEditable = (firebase.auth().currentUser) ? true : false;
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
@@ -92,8 +100,13 @@ firebase.database().ref('metadata').on('child_added', function(snapshot) {
 
 firebase.database().ref('metadata').on('child_changed', function(snapshot) {
   var card = document.getElementById(snapshot.key);
-  card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;
-  sortRockets();
+  var titleElement = card.querySelector('.mdl-card__title-text');
+
+  titleElement.textContent = snapshot.val().name;
+
+  if (!titleElement.isSameNode(document.activeElement)) {
+    sortRockets();
+  }
 });
 
 firebase.database().ref('metadata').on('child_removed', function(snapshot) {
