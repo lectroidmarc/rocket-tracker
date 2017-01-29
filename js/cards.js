@@ -59,15 +59,17 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   };
 
   card.querySelector('.hide').onclick = function () {
-    cell.classList.add('hidden');
-    RocketMap.hideRocket(snapshot.key);
-    document.querySelector('.show-hidden').classList.remove('disabled');
+    hideRocket(snapshot.key);
   };
 
   var upgradableButtons = card.querySelectorAll('button.mdl-js-button');
   Array.prototype.forEach.call(upgradableButtons, function (button) {
     componentHandler.upgradeElement(button);
   });
+
+  if (localSetting.containsItem('hiddenItems', snapshot.key)) {
+    hideRocket(snapshot.key);
+  }
 });
 
 firebase.database().ref('rockets').on('child_changed', function(snapshot) {
