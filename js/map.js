@@ -22,6 +22,10 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
 
   if (rocket.location) {
     RocketMap.addRocket(snapshot.key, rocket.location);
+
+    if (localSetting.containsItem('hiddenItems', snapshot.key)) {
+      RocketMap.hideRocket(snapshot.key);
+    }
   }
 });
 

@@ -59,7 +59,14 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   };
 
   card.querySelector('.hide').onclick = function () {
-    hideRocket(snapshot.key);
+    // Hide the card
+    document.getElementById(snapshot.key).parentNode.classList.add('hidden');
+    // Hide the map marker
+    RocketMap.hideRocket(snapshot.key);
+    // Enable the button to re-show the hidden things
+    document.querySelector('.show-hidden').classList.remove('disabled');
+    // Save the fact we're hiding this rocket
+    localSetting.pushItem('hiddenItems', snapshot.key);
   };
 
   var upgradableButtons = card.querySelectorAll('button.mdl-js-button');
@@ -68,7 +75,8 @@ firebase.database().ref('rockets').on('child_added', function(snapshot) {
   });
 
   if (localSetting.containsItem('hiddenItems', snapshot.key)) {
-    hideRocket(snapshot.key);
+    card.classList.add('hidden');
+    document.querySelector('.show-hidden').classList.remove('disabled');
   }
 });
 
