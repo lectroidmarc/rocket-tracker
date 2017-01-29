@@ -47,6 +47,7 @@ var RocketMap = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
+      self.recenter();
     }, function () {}, {enableHighAccuracy: true});
 
     navigator.geolocation.watchPosition(function (position) {
@@ -73,6 +74,10 @@ var RocketMap = {
       if (this._markers[id].getMap()) {
         this._bounds.extend(this._markers[id].getPosition());
       }
+    }
+    var selfPosition = this._selfMarker.getPosition();
+    if (selfPosition) {
+      this._bounds.extend(selfPosition);
     }
   },
 
