@@ -12,7 +12,7 @@ document.registerElement('geo-distance', {
       }
     },
     haversine: {
-     value: function (source, dest) {
+      value: function (source, dest) {
         var R = 20903520; // Earth radius, feet
 
         var φ1 = source.latitude.toRadians();
@@ -29,7 +29,7 @@ document.registerElement('geo-distance', {
       }
     },
     update: {
-     value: function () {
+      value: function () {
         if (this.source && this.location) {
           var distance = this.haversine(this.source, this.location);
           if (distance > 10000) {
@@ -58,5 +58,5 @@ document.registerElement('geo-distance', {
 });
 
 if (Number.prototype.toRadians === undefined) {
-  Number.prototype.toRadians = function() { return this * Math.PI / 180; };
+  Number.prototype.toRadians = function () { return this * Math.PI / 180; };
 }

@@ -17,7 +17,7 @@ var RocketMap = {
       streetViewControl: false
     });
 
-    google.maps.event.addDomListener(window, 'resize', function() {
+    google.maps.event.addDomListener(window, 'resize', function () {
       self.resize();
     });
 
@@ -38,7 +38,7 @@ var RocketMap = {
       title: 'You are Here'
     });
 
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       self._selfMarker.setPosition({
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -101,7 +101,7 @@ var RocketMap = {
       }
     });
 
-    marker.addListener('click', function() {
+    marker.addListener('click', function () {
       self._infowindow.setContent(this.getTitle());
       self._infowindow.open(self._map, this);
     });

@@ -1,0 +1,14 @@
+{
+  "preset": "google",
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
+  "disallowSpacesInFunctionExpression": false,
+  "disallowSpacesInAnonymousFunctionExpression": false,
+  "disallowMultipleLineBreaks": false,
+  "maximumLineLength": null,
+
+  "disallowFunctionDeclarations": true,
+  "requireSpacesInFunctionExpression": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  }
+}
