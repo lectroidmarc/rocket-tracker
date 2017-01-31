@@ -2,20 +2,22 @@
  *
  */
 
-var mapElement = document.getElementById('map-view');
+(function () {
+  var mapElement = document.getElementById('map-view');
 
-RocketMap.init(mapElement);
+  RocketMap.init(mapElement);
 
-var observer = new MutationObserver(function (mutations) {
-  mutations.forEach(function (mutation) {
-    RocketMap.resize();
-    RocketMap.recenter();
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      RocketMap.resize();
+      RocketMap.recenter();
+    });
   });
-});
 
-observer.observe(mapElement, {
-  attributes: true
-});
+  observer.observe(mapElement, {
+    attributes: true
+  });
+})();
 
 firebase.database().ref('rockets').on('child_added', function (snapshot) {
   var rocket = snapshot.val();
