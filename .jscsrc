@@ -3,7 +3,6 @@
   "requireCamelCaseOrUpperCaseIdentifiers": false,
   "disallowSpacesInFunctionExpression": false,
   "disallowSpacesInAnonymousFunctionExpression": false,
-  "disallowMultipleLineBreaks": false,
   "maximumLineLength": null,
 
   "disallowFunctionDeclarations": true,

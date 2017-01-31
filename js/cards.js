@@ -105,7 +105,6 @@ firebase.database().ref('rockets').on('child_removed', function (snapshot) {
   card.parentNode().parentNode().remove();
 });
 
-
 firebase.database().ref('metadata').on('child_added', function (snapshot) {
   var card = document.getElementById(snapshot.key);
   card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;

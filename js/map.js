@@ -43,7 +43,6 @@ firebase.database().ref('rockets').on('child_removed', function (snapshot) {
   RocketMap.removeRocket(snapshot.key);
 });
 
-
 firebase.database().ref('metadata').on('child_added', function (snapshot) {
   RocketMap.updateRocketName(snapshot.key, snapshot.val().name);
 });
