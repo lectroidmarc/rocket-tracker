@@ -107,22 +107,26 @@ firebase.database().ref('rockets').on('child_removed', function (snapshot) {
 
 firebase.database().ref('metadata').on('child_added', function (snapshot) {
   var card = document.getElementById(snapshot.key);
-  card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;
-  sortRockets();
+  if (card) {
+    card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;
+    sortRockets();
+  }
 });
 
 firebase.database().ref('metadata').on('child_changed', function (snapshot) {
   var card = document.getElementById(snapshot.key);
-  var titleElement = card.querySelector('.mdl-card__title-text');
-
-  titleElement.textContent = snapshot.val().name;
-
-  if (!titleElement.isSameNode(document.activeElement)) {
-    sortRockets();
+  if (card) {
+    var titleElement = card.querySelector('.mdl-card__title-text');
+    titleElement.textContent = snapshot.val().name;
+    if (!titleElement.isSameNode(document.activeElement)) {
+      sortRockets();
+    }
   }
 });
 
 firebase.database().ref('metadata').on('child_removed', function (snapshot) {
   var card = document.getElementById(snapshot.key);
-  card.querySelector('.mdl-card__title-text').textContent = snapshot.key;
+  if (card) {
+    card.querySelector('.mdl-card__title-text').textContent = snapshot.key;
+  }
 });
