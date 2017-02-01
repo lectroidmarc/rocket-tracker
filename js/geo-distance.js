@@ -51,7 +51,7 @@ document.registerElement('geo-distance', {
         navigator.geolocation.watchPosition(function (position) {
           self.source = position.coords;
           self.update();
-        });
+        }, function () {}, {enableHighAccuracy: true});
       }
     }
   })
