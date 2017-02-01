@@ -75,7 +75,7 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
   });
 
   if (localSetting.containsItem('hiddenItems', snapshot.key)) {
-    card.classList.add('hidden');
+    card.parentNode.classList.add('hidden');
     document.querySelector('.show-hidden').classList.remove('disabled');
   }
 });

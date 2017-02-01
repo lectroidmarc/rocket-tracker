@@ -17,9 +17,6 @@ var sortRockets = function () {
   var rockets = document.querySelector('.rockets');
 
   Array.prototype.slice.call(rockets.children)
-    .map(function (rocket) {
-      return rockets.removeChild(rocket);
-    })
     .sort(function (a, b) {
       return a.querySelector('.mdl-card__title-text').textContent.localeCompare(b.querySelector('.mdl-card__title-text').textContent);
     })
