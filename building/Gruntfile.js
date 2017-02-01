@@ -31,7 +31,8 @@ module.exports = function(grunt) {
           key: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.key'),
           cert: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.crt')
         },
-        livereloadOnError: false
+        livereloadOnError: false,
+        maxListeners: 24,
       },
       html: {
         files: ['../index.html']
