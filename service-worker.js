@@ -2,7 +2,7 @@
  *
  */
 
-var CACHE_NAME = 'cache-v1';
+var CACHE_NAME = 'cache-v2';
 var urlsToCache = [
   '.',
   'index.html',
