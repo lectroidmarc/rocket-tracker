@@ -35,8 +35,10 @@ self.addEventListener('install', function (event) {
 
       // Do longhand caching to support 'no-cors' so we can pre-cache
       // the 3rd party library files.
-      return urlsToCache.map(function(urlToPrefetch) {
-        var request = new Request (urlToPrefetch, { mode: 'no-cors' });
+      return urlsToCache.map(function (urlToPrefetch) {
+        var request = new Request(urlToPrefetch, {
+          mode: 'no-cors'
+        });
         return fetch(request).then(function (fetchResponse) {
           cache.put(request, fetchResponse);
         });
@@ -81,7 +83,10 @@ self.addEventListener('fetch', function (event) {
       }).catch(function (err) {
         // Return something inncouous if we fall into here (which we will
         // if the network is down).
-        return new Response(null, { status: 503, statusText: 'Service Unavailable' });
+        return new Response(null, {
+          status: 503,
+          statusText: 'Service Unavailable'
+        });
       });
     })
   );
