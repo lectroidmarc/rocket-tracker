@@ -2,7 +2,7 @@
  *
  */
 
-var CACHE_NAME = 'cache-v2';
+var CACHE_NAME = 'cache-apollo';
 var urlsToCache = [
   '.',
   'index.html',
@@ -15,7 +15,6 @@ var urlsToCache = [
 
   'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.23/CustomElements.min.js',
   'https://code.getmdl.io/1.3.0/material.min.js',
-  'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyC0p0HTIuKGniuH1CMJbuCO-uCSScSX5Xg',
   'https://www.gstatic.com/firebasejs/3.6.4/firebase.js',
 
   'js/geo-distance.js',
