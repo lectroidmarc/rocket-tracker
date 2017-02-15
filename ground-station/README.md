@@ -8,7 +8,11 @@ Rename the `config.sample.js` file to `config.js` and edit what needs to be edit
 
 There are different blocks for each supported XBee radio type, XBee Series 1, XBee-PRO 900 and XBee Zigbee modules.  Many options are duplicated for so only uncomment one set at a time.
 
+#### Firebase Service Account
+
 To talk to Firebase, the node app assumes you have a valid [Service Account key file](https://firebase.google.com/docs/server/setup#prerequisites) saved to `serviceAccountKey.json`.
+
+### Manual Starting
 
 Start the listener with:
 
