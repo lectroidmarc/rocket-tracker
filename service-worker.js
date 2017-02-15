@@ -2,7 +2,7 @@
  *
  */
 
-var CACHE_NAME = 'cache-apollo';
+var CACHE_NAME = 'cache-mercury';
 var urlsToCache = [
   '.',
   'index.html',
@@ -13,9 +13,9 @@ var urlsToCache = [
 
   'css/main.css',
 
-  'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.23/CustomElements.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/CustomElements.min.js',
   'https://code.getmdl.io/1.3.0/material.min.js',
-  'https://www.gstatic.com/firebasejs/3.6.4/firebase.js',
+  'https://www.gstatic.com/firebasejs/3.6.9/firebase.js',
 
   'js/geo-distance.js',
   'js/battery-icon.js',
