@@ -38,11 +38,17 @@ var RocketMap = {
       title: 'You are Here'
     });
 
+    this._headingMarker = new google.maps.Marker({
+      icon: {
+        fillColor: 'rgb(96,125,139)',
+        fillOpacity: 0.9,
+        strokeWeight: 1,
+        scale: 3,
+        path: google.maps.SymbolPath.FORWARD_OPEN_ARROW
+      }
+    });
+
     navigator.geolocation.getCurrentPosition(function (position) {
-      self._selfMarker.setPosition({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      });
       self._bounds.extend({
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -55,6 +61,28 @@ var RocketMap = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
+
+      if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
+        if (!self._headingMarker.getMap()) {
+          self._headingMarker.setMap(self._map);
+        }
+
+        self._headingMarker.setPosition({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+
+        var headingIcon = self._headingMarker.getIcon();
+        headingIcon.rotation = position.coords.heading;
+        headingIcon.anchor = new google.maps.Point(
+          6 * Math.sin(position.coords.heading * (Math.PI / 180)),
+          6 * Math.cos(position.coords.heading * (Math.PI / 180)) + 12
+        );
+
+        self._headingMarker.setIcon(headingIcon);
+      } else {
+        self._headingMarker.setMap();
+      }
     }, function () {}, {enableHighAccuracy: true});
   },
 

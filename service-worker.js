@@ -2,7 +2,7 @@
  *
  */
 
-var CACHE_NAME = 'cache-mercury';
+var CACHE_NAME = 'cache-speedmaster';
 var urlsToCache = [
   '.',
   'index.html',
