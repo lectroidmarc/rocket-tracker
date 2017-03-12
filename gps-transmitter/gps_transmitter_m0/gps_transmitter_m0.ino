@@ -105,36 +105,33 @@ void loop() {
     gps_status &= ~(7 << 2);  // clear bits 2 - 4
 
     /*
-     * Battery voltage chart that seems to best match reality.
+     * Battery status based on the following:
      *
-     * range                  bits
-     * -----                  ----
-     * 4.20 - 100% -- 4.14     7
-     * 4.13 -- 90% -- 4.07     6
-     * 4.06 -- 80% -- 4.00     5
-     * 3.99 -- 70% -- 3.93     n/a
-     * 3.92 -- 60% -- 3.86     4
-     * 3.85 -- 50% -- 3.79     3
-     * 3.78 -- 40% -- 3.72     n/a
-     * 3.71 -- 30% -- 3.65     2
-     * 3.64 -- 20% -- 3.58     1
-     * 3.57 -- 10% -- 3.51     n/a
-     * 3.50 --  0%             0
+     * 4.14 volts or more is "full".
+     * 3.60 volts is the lowest usable voltage.
+     *
+     * So 4.14 volts works out to 95% so it shows as "full" while
+     * 3.60 volts works out to just above 15% which is the cutoff
+     * for "!".  Everything else just falls in the middle.
      */
-
-    if (measuredvbat > 4.13) {
+    float batteryPercentage = (10 - (4.17 - measuredvbat) / 0.0672) * 10;
+    if (batteryPercentage > 95) {
       gps_status |= 7 << 2;   // 100%
-    } else if (measuredvbat > 4.06) {
+    } else if (batteryPercentage > 85) {
       gps_status |= 6 << 2;   // 90%
-    } else if (measuredvbat > 3.99) {
+    } else if (batteryPercentage > 75) {
       gps_status |= 5 << 2;   // 80%
-    } else if (measuredvbat > 3.85) {
+    } else if (batteryPercentage > 65) {
+      gps_status |= 5 << 2;   // 70% but stay at 80%
+    } else if (batteryPercentage > 55) {
       gps_status |= 4 << 2;   // 60%
-    } else if (measuredvbat > 3.78) {
+    } else if (batteryPercentage > 45) {
       gps_status |= 3 << 2;   // 50%
-    } else if (measuredvbat > 3.64) {
+    } else if (batteryPercentage > 35) {
+      gps_status |= 2 << 2;   // 40% but stay at 50%
+    } else if (batteryPercentage > 25) {
       gps_status |= 2 << 2;   // 30%
-    } else if (measuredvbat > 3.57) {
+    } else if (batteryPercentage > 15) {
       gps_status |= 1 << 2;   // 20%
     }
 
