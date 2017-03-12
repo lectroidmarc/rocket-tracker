@@ -128,7 +128,7 @@ void loop() {
     } else if (batteryPercentage > 45) {
       gps_status |= 3 << 2;   // 50%
     } else if (batteryPercentage > 35) {
-      gps_status |= 2 << 2;   // 40% but stay at 50%
+      gps_status |= 3 << 2;   // 40% but stay at 50%
     } else if (batteryPercentage > 25) {
       gps_status |= 2 << 2;   // 30%
     } else if (batteryPercentage > 15) {
