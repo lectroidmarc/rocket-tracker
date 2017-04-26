@@ -15,13 +15,8 @@ geo-distance {
 }
 
 battery-icon {
-  align-items: center;
-  color: rgb(96,125,139);;
-  display: flex;
+  --battery-icon-color: rgb(96,125,139);
   font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-battery-icon path {
-  fill: rgb(96,125,139);
 }
 
 .mdl-layout:not(.is-upgraded) {

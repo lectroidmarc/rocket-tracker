@@ -46,7 +46,7 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
   titleText.contentEditable = (firebase.auth().currentUser) ? true : false;
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
-  card.querySelector('battery-icon').power_level = rocket.battery;
+  card.querySelector('battery-icon').powerLevel = rocket.battery;
   if (rocket.location) {
     card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(5) + ', ' + rocket.location.longitude.toFixed(5);
   }
@@ -86,7 +86,7 @@ firebase.database().ref('rockets').on('child_changed', function (snapshot) {
   var updatedDate = new Date(rocket.time);
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
-  card.querySelector('battery-icon').power_level = rocket.battery;
+  card.querySelector('battery-icon').powerLevel = rocket.battery;
   if (rocket.location) {
     card.querySelector('.location').textContent = 'Location: ' + rocket.location.latitude.toFixed(5) + ', ' + rocket.location.longitude.toFixed(5);
   }
