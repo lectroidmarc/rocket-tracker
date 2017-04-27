@@ -3,6 +3,7 @@
  */
 
 body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased
 }
 
@@ -16,7 +17,6 @@ geo-distance {
 
 battery-icon {
   --battery-icon-color: rgb(96,125,139);
-  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .mdl-layout:not(.is-upgraded) {
