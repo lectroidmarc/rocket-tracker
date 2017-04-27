@@ -16,7 +16,7 @@ document.querySelector('.login').onclick = function () {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/userinfo.email');
 
-  firebase.auth().signInWithPopup(provider).then(function (result) {
+  firebase.auth().signInWithPopup(provider).then(function () {
     closeDrawer();
     showToastAlert('Successfully Logged In.');
   }).catch(function (error) {

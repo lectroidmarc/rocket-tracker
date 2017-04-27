@@ -2,7 +2,7 @@
  *
  */
 
-var CACHE_NAME = 'cache-20170427-01';
+var CACHE_NAME = 'cache-20170427-02';
 var urlsToCache = [
   '.',
   'index.html',

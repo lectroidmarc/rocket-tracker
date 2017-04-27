@@ -4,6 +4,12 @@
 
 module.exports = function (grunt) {
   grunt.initConfig({
+    concat: {
+      js: {
+        src: ['../js/*.js'],
+        dest: 'concat.js',
+      }
+    },
     connect: {
       server: {
         options: {
@@ -25,6 +31,39 @@ module.exports = function (grunt) {
         }
       }
     },
+    jscs: {
+      options: {
+        config: true
+      },
+      js: ['../js/*.js', '../service-worker.js'],
+    },
+    jshint: {
+      beforeconcat: {
+        options: {
+          jshintrc: true
+        },
+        files: {
+          src: ['../js/*.js', '../service-worker.js']
+        }
+      },
+      afterconcat: {
+        options: {
+          browser: true,
+          devel: true,
+          esversion: 6,
+          undef: true,
+          unused: true,
+          globals: {
+            componentHandler: true,
+            firebase: true,
+            google: true
+          },
+        },
+        files: {
+          src: ['concat.js']
+        }
+      }
+    },
     watch: {
       options: {
         livereload: {
@@ -38,7 +77,8 @@ module.exports = function (grunt) {
         files: ['../index.html']
       },
       js: {
-        files: ['../js/*.js', '../service-worker.js']
+        files: ['../js/*.js', '../service-worker.js'],
+        tasks: ['checkjs']
       },
       css: {
         files: ['../css/*.css']
@@ -46,8 +86,12 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks("grunt-jscs");
 
   grunt.registerTask('default', ['connect', 'watch']);
+  grunt.registerTask('checkjs', ['jshint:beforeconcat', 'concat:js', 'jshint:afterconcat', 'jscs']);
 };
