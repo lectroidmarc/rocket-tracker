@@ -2,7 +2,7 @@
  *
  */
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
     connect: {
       server: {
@@ -12,8 +12,8 @@ module.exports = function(grunt) {
           protocol: 'http2',
           livereload: true,
           open: 'https://localhost:8000',
-          middleware: function(connect, options, middlewares) {
-            middlewares.unshift(function(req, res, next) {
+          middleware: function (connect, options, middlewares) {
+            middlewares.unshift(function (req, res, next) {
               if (req.url === '/manifest.json') {
                 res.setHeader('Content-Type', 'application/manifest+json');
               }
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         files: ['../index.html']
       },
       js: {
-        files: ['../js/*.js']
+        files: ['../js/*.js', '../service-worker.js']
       },
       css: {
         files: ['../css/*.css']
