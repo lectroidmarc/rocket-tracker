@@ -14,7 +14,7 @@ var urlsToCache = [
   'css/main.css',
 
   'https://code.getmdl.io/1.3.0/material.min.js',
-  'https://www.gstatic.com/firebasejs/3.6.9/firebase.js',
+  'https://www.gstatic.com/firebasejs/3.9.0/firebase.js',
 
   'js/geo-distance.js',
   'js/battery-icon.js',
