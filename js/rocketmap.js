@@ -6,8 +6,6 @@ var RocketMap = {
   _markers: {},
 
   init: function (dom_element) {
-    var self = this;
-
     this._map = new google.maps.Map(dom_element, {
       zoom: 18,
       center: {
@@ -17,8 +15,8 @@ var RocketMap = {
       streetViewControl: false
     });
 
-    google.maps.event.addDomListener(window, 'resize', function () {
-      self.resize();
+    google.maps.event.addDomListener(window, 'resize', () => {
+      this.resize();
     });
 
     this._bounds = new google.maps.LatLngBounds();
@@ -48,42 +46,42 @@ var RocketMap = {
       }
     });
 
-    navigator.geolocation.getCurrentPosition(function (position) {
-      self._bounds.extend({
+    navigator.geolocation.getCurrentPosition(position => {
+      this._bounds.extend({
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
-      self.recenter();
-    }, function () {}, {enableHighAccuracy: true});
+      this.recenter();
+    }, () => {}, {enableHighAccuracy: true});
 
-    navigator.geolocation.watchPosition(function (position) {
-      self._selfMarker.setPosition({
+    navigator.geolocation.watchPosition(position => {
+      this._selfMarker.setPosition({
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
 
       if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
-        if (!self._headingMarker.getMap()) {
-          self._headingMarker.setMap(self._map);
+        if (!this._headingMarker.getMap()) {
+          this._headingMarker.setMap(this._map);
         }
 
-        self._headingMarker.setPosition({
+        this._headingMarker.setPosition({
           lat: position.coords.latitude,
           lng: position.coords.longitude
         });
 
-        var headingIcon = self._headingMarker.getIcon();
+        let headingIcon = this._headingMarker.getIcon();
         headingIcon.rotation = position.coords.heading;
         headingIcon.anchor = new google.maps.Point(
           6 * Math.sin(position.coords.heading * (Math.PI / 180)),
           6 * Math.cos(position.coords.heading * (Math.PI / 180)) + 12
         );
 
-        self._headingMarker.setIcon(headingIcon);
+        this._headingMarker.setIcon(headingIcon);
       } else {
-        self._headingMarker.setMap();
+        this._headingMarker.setMap();
       }
-    }, function () {}, {enableHighAccuracy: true});
+    }, () => {}, {enableHighAccuracy: true});
   },
 
   resize: function () {
@@ -98,7 +96,7 @@ var RocketMap = {
 
   rebound: function () {
     this._bounds = new google.maps.LatLngBounds();
-    for (var id in this._markers) {
+    for (let id in this._markers) {
       if (this._markers[id].getMap()) {
         this._bounds.extend(this._markers[id].getPosition());
       }
@@ -110,8 +108,6 @@ var RocketMap = {
   },
 
   addRocket: function (id, location) {
-    var self = this;
-
     var marker = new google.maps.Marker({
       position: {
         lat: location.latitude,
@@ -129,9 +125,9 @@ var RocketMap = {
       }
     });
 
-    marker.addListener('click', function () {
-      self._infowindow.setContent(this.getTitle());
-      self._infowindow.open(self._map, this);
+    marker.addListener('click', () => {
+      this._infowindow.setContent(this.getTitle());
+      this._infowindow.open(this._map, this);
     });
 
     this._bounds.extend(marker.getPosition());
@@ -179,7 +175,7 @@ var RocketMap = {
   },
 
   showAllRockets: function () {
-    for (var id in this._markers) {
+    for (let id in this._markers) {
       if (!this._markers[id].getMap()) {
         this.showRocket(id);
       }
