@@ -14,10 +14,6 @@ main {
   background-color: #eee;
 }
 
-geo-distance {
-  display: inline;
-}
-
 battery-icon {
   --battery-icon-color: var(--primary-color);
 }
