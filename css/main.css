@@ -50,13 +50,9 @@ battery-icon {
 .rocket .fix {
   margin-right: 5px;
 }
-.rocket .battery {
-  margin-left: 5px;
-}
 .rocket .location {
   font-size: 16px;
 }
-
 .rocket .updated {
   font-size: 12px;
   font-style: italic;
