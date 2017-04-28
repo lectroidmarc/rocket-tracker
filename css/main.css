@@ -27,7 +27,6 @@ battery-icon {
 }
 
 .rocket {
-  min-height: initial;
   transition: box-shadow 2s;
   width: 100%;
 }
