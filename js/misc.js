@@ -25,8 +25,8 @@ var sortRockets = function () {
     });
 };
 
-document.querySelector('.show-hidden').onclick = function () {
-  if (!this.classList.contains('disabled')) {
+document.querySelector('.show-hidden').onclick = function (e) {
+  if (!e.currentTarget.classList.contains('disabled')) {
     localSetting.removeItem('hiddenItems');
 
     var hiddenCells = document.querySelectorAll('main .rockets .mdl-cell.hidden');
@@ -38,7 +38,7 @@ document.querySelector('.show-hidden').onclick = function () {
     RocketMap.recenter();
 
     closeDrawer();
-    this.classList.add('disabled');
+    e.currentTarget.classList.add('disabled');
   }
 };
 
