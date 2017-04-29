@@ -35,11 +35,11 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
       });
     }
   };
-  titleText.onfocus = function () {
-    this.dataOriginalTextContent = this.textContent;
+  titleText.onfocus = function (e) {
+    e.target.dataset.originalContent = e.target.textContent;
   };
-  titleText.onblur = function () {
-    if (this.dataOriginalTextContent !== this.textContent) {
+  titleText.onblur = function (e) {
+    if (e.target.dataset.originalContent !== e.target.textContent) {
       sortRockets();
     }
   };

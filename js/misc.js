@@ -10,7 +10,10 @@ var showToastAlert = function (message) {
 };
 
 var closeDrawer = function () {
-  document.querySelector('.mdl-layout__obfuscator.is-visible').click();
+  var visibleObfuscator = document.querySelector('.mdl-layout__obfuscator.is-visible');
+  if (visibleObfuscator) {
+    visibleObfuscator.click();
+  }
 };
 
 var sortRockets = function () {
