@@ -13,7 +13,7 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
   var updatedDate = new Date(rocket.time);
 
   var card = document.createElement('div');
-  card.id = snapshot.key;
+  card.id = 'r' + snapshot.key;
   card.className = 'mdl-card rocket';
   cell.appendChild(card);
 
@@ -60,7 +60,7 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
 
   card.querySelector('.hide').onclick = function () {
     // Hide the card
-    document.getElementById(snapshot.key).parentNode.classList.add('hidden');
+    document.getElementById('r' + snapshot.key).parentNode.classList.add('hidden');
     // Hide the map marker
     RocketMap.hideRocket(snapshot.key);
     // Enable the button to re-show the hidden things
@@ -82,7 +82,7 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
 
 firebase.database().ref('rockets').on('child_changed', function (snapshot) {
   var rocket = snapshot.val();
-  var card = document.getElementById(snapshot.key);
+  var card = document.getElementById('r' + snapshot.key);
   var updatedDate = new Date(rocket.time);
 
   card.querySelector('.fix').textContent = (rocket.fix) ? 'gps_fixed' : 'gps_not_fixed';
@@ -101,12 +101,12 @@ firebase.database().ref('rockets').on('child_changed', function (snapshot) {
 });
 
 firebase.database().ref('rockets').on('child_removed', function (snapshot) {
-  var card = document.getElementById(snapshot.key);
+  var card = document.getElementById('r' + snapshot.key);
   card.parentNode().parentNode().remove();
 });
 
 firebase.database().ref('metadata').on('child_added', function (snapshot) {
-  var card = document.getElementById(snapshot.key);
+  var card = document.getElementById('r' + snapshot.key);
   if (card) {
     card.querySelector('.mdl-card__title-text').textContent = snapshot.val().name;
     sortRockets();
@@ -114,7 +114,7 @@ firebase.database().ref('metadata').on('child_added', function (snapshot) {
 });
 
 firebase.database().ref('metadata').on('child_changed', function (snapshot) {
-  var card = document.getElementById(snapshot.key);
+  var card = document.getElementById('r' + snapshot.key);
   if (card) {
     var titleElement = card.querySelector('.mdl-card__title-text');
     titleElement.textContent = snapshot.val().name;
@@ -125,7 +125,7 @@ firebase.database().ref('metadata').on('child_changed', function (snapshot) {
 });
 
 firebase.database().ref('metadata').on('child_removed', function (snapshot) {
-  var card = document.getElementById(snapshot.key);
+  var card = document.getElementById('r' + snapshot.key);
   if (card) {
     card.querySelector('.mdl-card__title-text').textContent = snapshot.key;
   }
