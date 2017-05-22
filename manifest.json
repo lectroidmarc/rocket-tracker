@@ -1,6 +1,6 @@
 {
   "name": "Rocket Tracker",
-  "short_name": "Rocket Tracker",
+  "short_name": "Tracker",
   "background_color": "#eee",
   "theme_color": "rgb(96,125,139)",
   "display": "standalone",
