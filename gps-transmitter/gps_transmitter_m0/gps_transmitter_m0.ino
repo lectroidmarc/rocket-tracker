@@ -74,6 +74,8 @@ void setup() {
 
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCONLY);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);
+//  GPS.sendCommand("$PMTK220,2000*1C");  // NMEA update every 2 seconds
+//  GPS.sendCommand("$PMTK220,5000*1B");  // NMEA update every 5 seconds
 
   pinMode(13, OUTPUT);  // Use the onboard LED as an error light for XBee packet failures
 }
