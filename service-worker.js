@@ -2,7 +2,7 @@
  *
  */
 
-var CACHE_NAME = 'cache-20170521-01';
+var CACHE_NAME = 'cache-20170612-01';
 var urlsToCache = [
   '.',
   'index.html',
@@ -14,7 +14,7 @@ var urlsToCache = [
   'css/main.css',
 
   'https://code.getmdl.io/1.3.0/material.min.js',
-  'https://www.gstatic.com/firebasejs/3.9.0/firebase.js',
+  'https://www.gstatic.com/firebasejs/4.1.2/firebase.js',
 
   'js/geo-distance.js',
   'js/battery-icon.js',
