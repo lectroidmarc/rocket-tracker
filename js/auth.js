@@ -3,9 +3,9 @@
  */
 
 firebase.auth().onAuthStateChanged(function (user) {
-  var cardTitles = document.querySelectorAll('.rocket .mdl-card__title-text');
-  Array.prototype.forEach.call(cardTitles, function (title) {
-    title.contentEditable = (user) ? true : false;
+  var cardTitles = Array.from(document.querySelectorAll('.rocket .mdl-card__title-text') || []);
+  cardTitles.forEach(title => {
+    title.contentEditable = !!user;
   });
 
   document.querySelector('.login').classList.toggle('hidden', user);
