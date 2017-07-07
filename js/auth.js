@@ -3,8 +3,7 @@
  */
 
 firebase.auth().onAuthStateChanged(function (user) {
-  var cardTitles = Array.from(document.querySelectorAll('.rocket .mdl-card__title-text') || []);
-  cardTitles.forEach(title => {
+  document.querySelectorAll('.rocket .mdl-card__title-text').forEach(title => {
     title.contentEditable = !!user;
   });
 

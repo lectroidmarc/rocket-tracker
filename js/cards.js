@@ -69,8 +69,7 @@ firebase.database().ref('rockets').on('child_added', function (snapshot) {
     localSetting.pushItem('hiddenItems', snapshot.key);
   };
 
-  var upgradableButtons = Array.from(card.querySelectorAll('button.mdl-js-button') || []);
-  upgradableButtons.forEach(button => {
+  card.querySelectorAll('button.mdl-js-button').forEach(button => {
     componentHandler.upgradeElement(button);
   });
 

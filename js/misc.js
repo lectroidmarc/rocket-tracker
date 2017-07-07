@@ -32,8 +32,7 @@ document.querySelector('.show-hidden').onclick = function (e) {
   if (!e.currentTarget.classList.contains('disabled')) {
     localSetting.removeItem('hiddenItems');
 
-    var hiddenCells = Array.from(document.querySelectorAll('main .rockets .mdl-cell.hidden') || []);
-    hiddenCells.forEach(cell => {
+    document.querySelectorAll('main .rockets .mdl-cell.hidden').forEach(cell => {
       cell.classList.remove('hidden');
     });
 
