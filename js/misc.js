@@ -20,10 +20,12 @@ var sortRockets = function () {
   var rockets = document.querySelector('.rockets');
 
   Array.prototype.slice.call(rockets.children)
-    .sort(function (a, b) {
-      return a.querySelector('.mdl-card__title-text').textContent.localeCompare(b.querySelector('.mdl-card__title-text').textContent);
+    .sort((a, b) => {
+      let aTextContent = a.querySelector('.mdl-card__title-text').textContent;
+      let bTextContent = b.querySelector('.mdl-card__title-text').textContent;
+      return aTextContent.localeCompare(bTextContent);
     })
-    .forEach(function (rocket) {
+    .forEach(rocket => {
       rockets.appendChild(rocket);
     });
 };
