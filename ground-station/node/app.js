@@ -23,9 +23,9 @@ try {
 }
 
 var serialport = new SerialPort(config.xbee.serial_port, {
-  baudrate: 9600,
-  parser: xbeeAPI.rawParser()
+  baudRate: 9600
 });
+serialport.pipe(xbeeAPI.parser);
 
 // Set XBee defaults on port connection
 serialport.on('open', function() {
@@ -58,7 +58,7 @@ serialport.on('open', function() {
 
   // Check every so often to make sure the serial port hasn't gone away
   setInterval(function () {
-    if (!serialport.isOpen()) {
+    if (!serialport.isOpen) {
       console.error('Serial port has closed');
       process.exit(1);
     }
@@ -75,7 +75,7 @@ firebaseAdmin.initializeApp({
   databaseURL: config.firebase.databaseURL
 });
 
-xbeeAPI.on('frame_object', function(frame) {
+xbeeAPI.parser.on('data', function(frame) {
   //console.log(">>", frame);
 
   if (frame.type === C.FRAME_TYPE.RX_PACKET_64 || frame.type === C.FRAME_TYPE.ZIGBEE_RECEIVE_PACKET) {
