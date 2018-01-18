@@ -1,0 +1,20 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "arrow-spacing": "warn",
+    "eqeqeq": "warn",
+    "keyword-spacing": "warn",
+    "no-confusing-arrow": "warn",
+    "quotes": [
+      "warn",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "space-before-blocks": "warn",
+    "space-before-function-paren": "warn"
+  }
+}
