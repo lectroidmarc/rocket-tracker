@@ -11,6 +11,7 @@
   "dependencies": {
     "firebase-admin": "^8.0.0",
     "serialport": "^6.0.0",
+    "tar-fs": ">=1.16.2",
     "xbee-api": "^0.6.0"
   }
 }
