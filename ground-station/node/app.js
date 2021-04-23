@@ -15,13 +15,6 @@ var xbeeAPI = new xbee_api.XBeeAPI({
   api_mode: 2
 });
 
-// Intel Edison needs the UART pins "enabled"
-try {
-  var mraa = require('mraa');
-  var uart = new mraa.Uart(config.xbee.serial_port);
-} catch (err) {
-}
-
 var serialport = new SerialPort(config.xbee.serial_port, {
   baudRate: 9600
 });
