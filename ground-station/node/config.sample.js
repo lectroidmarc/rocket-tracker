@@ -7,7 +7,7 @@ var config = {
     databaseURL: "https://<DATABASE_NAME>.firebaseio.com"
   },
   xbee: {
-    serial_port: '/dev/ttyMFD1'           // Edison Serial1: /dev/ttyMFD1
+    serial_port: '/dev/ttyUSB0'
   }
 };
 
