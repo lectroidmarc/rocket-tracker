@@ -9,7 +9,7 @@
   "author": "Marc Matteo <marcm@lectroid.net>",
   "license": "ISC",
   "dependencies": {
-    "firebase-admin": "^9.6.0",
+    "firebase-admin": "^11.4.1",
     "serialport": "^9.0.0",
     "tar-fs": "^2.0.0",
     "xbee-api": "^0.6.0"
